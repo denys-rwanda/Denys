@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>🌍 World Cities Gallery</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest"
+href="manifest.json">
+
+<link
+href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+<script src="//unpkg.com/globe.gl"></script>
+
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
+
+</head>
+
+<body>
+
+<!-- 🌌 STARS -->
+<div id="stars"></div>
+
+<!-- 🎬 INTRO -->
+<div id="intro">
+
+<h1 class="logo">
+🌍 WORLD CITIES
+</h1>
+
+</div>
+
+<!-- 🚀 SPLASH -->
+<div id="splash">
+
+<h1>
+🌍 World Cities
+</h1>
+
+</div>
+
+<!-- 🔥 HEADER -->
+
+<header class="header">
+
+<div class="logo-box">
+
+<h1 class="main-logo">
+🌍 World Cities Gallery
+</h1>
+
+<p class="subtitle">
+Explore Amazing Cities Around The World
+</p>
+
+</div>
+
+<div class="search-box">
+
+<input
+class="search"
+type="text"
+placeholder="🔍 Search city..."
+id="searchInput">
+
+<button
+class="theme-btn">
+🌙
+</button>
+
+</div>
+
+</header>
+
+<!-- 📸 STORIES -->
+
+<div class="stories">
+
+<div class="story">
+<img src="assets/images/story1.jpg">
+</div>
+
+<div class="story">
+<img src="assets/images/story2.jpg">
+</div>
+
+<div class="story">
+<img src="assets/images/story3.jpg">
+</div>
+
+</div>
+
+<!-- 🌍 CITY CONTAINER -->
+
+<div class="container"
+id="cityContainer">
+
+<!-- CARD -->
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200"
+loading="lazy">
+
+<div class="card-content">
+
+<h3>Kigali</h3>
+
+<p>Rwanda</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- 🔥 LIGHTBOX -->
+
+<div id="lightbox"
+class="lightbox">
+
+<span class="close-btn">
+×
+</span>
+
+<button class="fav-btn">
+❤️
+</button>
+
+<img id="lightboxImg">
+
+</div>
+
+<!-- 🗺️ MAP -->
+
+<iframe id="mapFrame"></iframe>
+
+<!-- 🤖 CHAT -->
+
+<div id="chatBox">
+
+<div id="messages"></div>
+
+<input
+type="text"
+id="userInput"
+placeholder="Ask AI about cities...">
+
+<button>
+Send
+</button>
+
+<button>
+🎤
+</button>
+
+</div>
+
+<!-- 🌎 GLOBE -->
+
+<div id="globeViz"></div>
+
+<!-- 🛰️ NASA -->
+
+<h2 class="section-title">
+🛰️ NASA Live Space
+</h2>
+
+<img id="nasaImg"
+width="100%">
+
+<!-- 🌍 CESIUM -->
+
+<div id="cesiumContainer"></div>
+
+<!-- 📥 DOWNLOAD -->
+
+<button id="downloadBtn">
+📥 Download
+</button>
+
+<!-- 📤 UPLOAD -->
+
+<input
+type="file"
+id="uploadInput"
+accept="image/*">
+
+<button>
+📤 Upload Photo
+</button>
+
+<div id="userGallery"></div>
+
+<!-- ❤️ LIKE -->
+
+<button class="like-btn">
+❤️ <span>0</span>
+</button>
+
+<!-- 💬 COMMENTS -->
+
+<div class="comments">
+
+<input
+type="text"
+placeholder="Write comment..."
+class="commentInput">
+
+<button>
+Send
+</button>
+
+<div class="commentList"></div>
+
+</div>
+
+<!-- 👤 LOGIN -->
+
+<div class="login-box">
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<button>
+Login
+</button>
+
+</div>
+
+<!-- 📸 CAMERA -->
+
+<video id="camera"
+autoplay>
+</video>
+
+<button>
+📸 Capture
+</button>
+
+<canvas id="canvas"></canvas>
+
+<!-- 🎥 VIDEO -->
+
+<input
+type="file"
+accept="video/*"
+id="videoUpload">
+
+<!-- 🎵 MUSIC -->
+
+<div class="music-player">
+
+<img id="cover"
+src="assets/images/cover.jpg">
+
+<h3 id="songTitle">
+Song Name
+</h3>
+
+<audio id="audio"
+controls>
+
+<source
+src="assets/music/music.mp3">
+
+</audio>
+
+</div>
+
+<!-- 🎮 QUIZ -->
+
+<button class="quiz-btn">
+🎮 Start Quiz
+</button>
+
+<!-- 🌧️ WEATHER -->
+
+<iframe
+width="100%"
+height="500"
+src="https://embed.windy.com/embed2.html">
+</iframe>
+
+<!-- 🌐 TRANSLATE -->
+
+<div id="google_translate_element"></div>
+
+<!-- 🕶️ VR -->
+
+<a-scene>
+
+<a-sky
+src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+</a-sky>
+
+</a-scene>
+
+<!-- 📱 BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<button>🏠</button>
+<button>🔍</button>
+<button>➕</button>
+<button>❤️</button>
+<button>👤</button>
+/* ================================================= */
+/* ================= script.js ===================== */
+/* ================================================= */
+
+/* 🌍 CITY DATA */
+
+const cities = [
+
+{
+name: "Kigali",
+country: "Rwanda",
+image:
+"https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200"
+},
+
+{
+name: "Paris",
+country: "France",
+image:
+"https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200"
+},
+
+{
+name: "Tokyo",
+country: "Japan",
+image:
+"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200"
+},
+
+{
+name: "Dubai",
+country: "UAE",
+image:
+"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200"
+},
+
+{
+name: "London",
+country: "UK",
+image:
+"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200"
+},
+
+{
+name: "New York",
+country: "USA",
+image:
+"https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=1200"
+}
+
+];
+
+/* 🔥 ELEMENTS */
+
+const container =
+document.getElementById(
+"cityContainer"
+);
+
+const lightbox =
+document.getElementById(
+"lightbox"
+);
+
+const lightboxImg =
+document.getElementById(
+"lightboxImg"
+);
+
+const searchInput =
+document.getElementById(
+"searchInput"
+);
+
+/* ❤️ FAVORITES */
+
+let favorites =
+JSON.parse(
+localStorage.getItem(
+"favorites"
+)
+) || [];
+
+/* 📌 CURRENT INDEX */
+
+let currentIndex = 0;
+
+/* ================================================= */
+/* ============== DISPLAY CITIES =================== */
+/* ================================================= */
+
+function displayCities(list) {
+
+container.innerHTML = "";
+
+list.forEach((city,index) => {
+
+container.innerHTML += `
+
+<div class="card">
+
+<img
+src="${city.image}"
+loading="lazy"
+ondblclick="openLightbox(${index})"
+ontouchstart="startLongPress(${index})"
+ontouchend="cancelLongPress()">
+
+<div class="card-content">
+
+<h3>${city.name}</h3>
+
+<p>${city.country}</p>
+
+<button
+onclick="downloadImage(
+'${city.image}',
+'${city.name}'
+)">
+📥 Download
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* ================================================= */
+/* ================= SEARCH ======================== */
+/* ================================================= */
+
+function searchCity(value) {
+
+let q =
+value.toLowerCase();
+
+let filtered =
+cities.filter(city => {
+
+return (
+
+city.name
+.toLowerCase()
+.includes(q)
+
+||
+
+city.country
+.toLowerCase()
+.includes(q)
+
+);
+
+});
+
+displayCities(filtered);
+
+}
+
+/* ================================================= */
+/* ================= LIGHTBOX ====================== */
+/* ================================================= */
+
+function openLightbox(index) {
+
+currentIndex = index;
+
+lightbox.style.display =
+"flex";
+
+lightboxImg.src =
+cities[index].image;
+
+setTimeout(() => {
+
+lightbox.classList.add(
+"show"
+);
+
+},10);
+
+playSound("open");
+
+loadMap(
+cities[index].name
+);
+
+}
+
+/* ❌ CLOSE */
+
+function closeLightbox() {
+
+lightbox.classList.remove(
+"show"
+);
+
+setTimeout(() => {
+
+lightbox.style.display =
+"none";
+
+},200);
+
+playSound("close");
+
+}
+
+/* ⌨️ ESC CLOSE */
+
+document.addEventListener(
+"keydown",
+
+e => {
+
+if(e.key === "Escape") {
+
+closeLightbox();
+
+}
+
+}
+
+);
+
+/* 👉 NEXT IMAGE */
+
+function nextImage() {
+
+currentIndex++;
+
+if(
+currentIndex >= cities.length
+) {
+
+currentIndex = 0;
+
+}
+
+updateImage();
+
+}
+
+/* 👈 PREVIOUS IMAGE */
+
+function prevImage() {
+
+currentIndex--;
+
+if(currentIndex < 0) {
+
+currentIndex =
+cities.length - 1;
+
+}
+
+updateImage();
+
+}
+
+/* 🔄 UPDATE */
+
+function updateImage() {
+
+lightboxImg.src =
+cities[currentIndex].image;
+
+loadMap(
+cities[currentIndex].name
+);
+
+}
+
+/* ⌨️ ARROWS */
+
+document.addEventListener(
+"keydown",
+
+e => {
+
+if(e.key === "ArrowRight") {
+
+nextImage();
+
+}
+
+if(e.key === "ArrowLeft") {
+
+prevImage();
+
+}
+
+}
+
+);
+
+/* ================================================= */
+/* ================= MOBILE SWIPE ================== */
+/* ================================================= */
+
+let startX = 0;
+
+lightbox.addEventListener(
+"touchstart",
+
+e => {
+
+startX =
+e.touches[0].clientX;
+
+}
+
+);
+
+lightbox.addEventListener(
+"touchend",
+
+e => {
+
+let endX =
+e.changedTouches[0].clientX;
+
+if(startX - endX > 50) {
+
+nextImage();
+
+}
+
+if(endX - startX > 50) {
+
+prevImage();
+
+}
+
+}
+
+);
+
+/* ================================================= */
+/* ================= LONG PRESS ==================== */
+/* ================================================= */
+
+let pressTimer;
+
+function startLongPress(index) {
+
+pressTimer =
+setTimeout(() => {
+
+openLightbox(index);
+
+},500);
+
+}
+
+function cancelLongPress() {
+
+clearTimeout(
+pressTimer
+);
+
+}
+
+/* ================================================= */
+/* ================= FAVORITES ===================== */
+/* ================================================= */
+
+function toggleFavorite(event) {
+
+event.stopPropagation();
+
+let img =
+cities[currentIndex].image;
+
+if(
+favorites.includes(img)
+) {
+
+favorites =
+favorites.filter(
+i => i !== img
+);
+
+alert(
+"Removed from favorites"
+);
+
+}
+
+else {
+
+favorites.push(img);
+
+alert(
+"Added to favorites ❤️"
+);
+
+}
+
+localStorage.setItem(
+
+"favorites",
+
+JSON.stringify(
+favorites
+)
+
+);
+
+}
+
+/* ================================================= */
+/* ================= DOWNLOAD ====================== */
+/* ================================================= */
+
+function downloadImage(
+imageUrl,
+cityName
+) {
+
+const link =
+document.createElement(
+"a"
+);
+
+link.href =
+imageUrl;
+
+link.download =
+cityName + ".jpg";
+
+document.body
+.appendChild(link);
+
+link.click();
+
+document.body
+.removeChild(link);
+
+}
+
+/* ================================================= */
+/* ================= THEME ========================= */
+/* ================================================= */
+
+function toggleTheme() {
+
+document.body
+.classList
+.toggle("light");
+
+}
+
+/* ================================================= */
+/* ================= GOOGLE MAP ==================== */
+/* ================================================= */
+
+function loadMap(cityName) {
+
+let map =
+document.getElementById(
+"mapFrame"
+);
+
+map.src =
+
+`https://www.google.com/maps?q=${cityName}&output=embed`;
+
+}
+
+/* ================================================= */
+/* ================= AI CHAT ======================= */
+/* ================================================= */
+
+function askAI() {
+
+let input =
+document.getElementById(
+"userInput"
+).value;
+
+let messages =
+document.getElementById(
+"messages"
+);
+
+let reply =
+"I know many cities 🌍";
+
+if(
+input.toLowerCase()
+.includes("kigali")
+) {
+
+reply =
+"Kigali is the capital city of Rwanda 🇷🇼";
+
+}
+
+if(
+input.toLowerCase()
+.includes("paris")
+) {
+
+reply =
+"Paris is famous for the Eiffel Tower 🇫🇷";
+
+}
+
+messages.innerHTML += `
+
+<p>
+<b>You:</b>
+${input}
+</p>
+
+<p>
+<b>AI:</b>
+${reply}
+</p>
+
+`;
+
+document.getElementById(
+"userInput"
+).value = "";
+
+}
+
+/* ================================================= */
+/* ================= SPEECH ======================== */
+/* ================================================= */
+
+function startVoice() {
+
+const recognition =
+
+new (
+window.SpeechRecognition
+||
+
+window.webkitSpeechRecognition
+)();
+
+recognition.lang =
+"en-US";
+
+recognition.onresult =
+function(event) {
+
+let text =
+event.results[0][0]
+.transcript;
+
+document.getElementById(
+"userInput"
+).value = text;
+
+askAI();
+
+};
+
+recognition.start();
+
+}
+
+/* ================================================= */
+/* ================= SOUND FX ====================== */
+/* ================================================= */
+
+function playSound(type) {
+
+let audio =
+
+new Audio(
+
+type === "open"
+
+?
+
+"https://www.soundjay.com/buttons/sounds/button-09.mp3"
+
+:
+
+"https://www.soundjay.com/buttons/sounds/button-10.mp3"
+
+);
+
+audio.play();
+
+}
+
+/* ================================================= */
+/* ================= IMAGE UPLOAD ================== */
+/* ================================================= */
+
+function uploadImage() {
+
+const file =
+
+document.getElementById(
+"uploadInput"
+).files[0];
+
+if(!file) return;
+
+const reader =
+new FileReader();
+
+reader.onload =
+function(e) {
+
+const img =
+document.createElement(
+"img"
+);
+
+img.src =
+e.target.result;
+
+document
+.getElementById(
+"userGallery"
+)
+.appendChild(img);
+
+saveImage(
+e.target.result
+);
+
+};
+
+reader.readAsDataURL(
+file
+);
+
+}
+
+/* 💾 SAVE */
+
+function saveImage(src) {
+
+let images =
+
+JSON.parse(
+
+localStorage.getItem(
+"userImages"
+)
+
+)
+
+||
+
+[];
+
+images.push(src);
+
+localStorage.setItem(
+
+"userImages",
+
+JSON.stringify(images)
+
+);
+
+}
+
+/* 🔄 LOAD SAVED */
+
+window.addEventListener(
+"DOMContentLoaded",
+
+() => {
+
+let images =
+
+JSON.parse(
+
+localStorage.getItem(
+"userImages"
+)
+
+)
+
+||
+
+[];
+
+images.forEach(src => {
+
+const img =
+
+document.createElement(
+"img"
+);
+
+img.src = src;
+
+document
+.getElementById(
+"userGallery"
+)
+.appendChild(img);
+
+});
+
+}
+
+);
+
+/* ================================================= */
+/* ================= LIKE SYSTEM =================== */
+/* ================================================= */
+
+function likePost(btn) {
+
+let count =
+
+btn.querySelector("span");
+
+count.innerText =
+
+parseInt(
+count.innerText
+)
+
++ 1;
+
+}
+
+/* ================================================= */
+/* ================= COMMENTS ====================== */
+/* ================================================= */
+
+function addComment(btn) {
+
+const parent =
+btn.parentElement;
+
+const input =
+
+parent.querySelector(
+".commentInput"
+);
+
+const list =
+
+parent.querySelector(
+".commentList"
+);
+
+if(
+input.value.trim() === ""
+) return;
+
+const p =
+document.createElement(
+"p"
+);
+
+p.innerText =
+input.value;
+
+list.appendChild(p);
+
+input.value = "";
+
+}
+
+/* ================================================= */
+/* ================= LOGIN ========================= */
+/* ================================================= */
+
+function login() {
+
+const username =
+
+document.getElementById(
+"username"
+).value;
+
+localStorage.setItem(
+"user",
+username
+);
+
+alert(
+"Welcome " + username
+);
+
+}
+
+/* ================================================= */
+/* ================= CAMERA ======================== */
+/* ================================================= */
+
+navigator.mediaDevices
+
+.getUserMedia({
+video:true
+})
+
+.then(stream => {
+
+document
+.getElementById(
+"camera"
+)
+.srcObject = stream;
+
+});
+
+/* 📸 TAKE PHOTO */
+
+function takePhoto() {
+
+const video =
+
+document.getElementById(
+"camera"
+);
+
+const canvas =
+
+document.getElementById(
+"canvas"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+canvas.width =
+video.videoWidth;
+
+canvas.height =
+video.videoHeight;
+
+ctx.drawImage(
+video,
+0,
+0
+);
+
+}
+
+/* ================================================= */
+/* ================= LOAD APP ====================== */
+/* ================================================= */
+
+displayCities(cities);
+
+</div>
+
+</body>
+</html>
