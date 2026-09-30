@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +14,8 @@
 <link rel="manifest" href="manifest.json">
 
 <link
-  href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css"
-  rel="stylesheet"
+    href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css"
+    rel="stylesheet"
 >
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
@@ -30,19 +31,30 @@
 <body>
 
 <!-- 🌌 STARS -->
+
 <div id="stars"></div>
 
+
 <!-- 🎬 INTRO -->
+
 <div id="intro">
+
     <h1 class="logo">🌍 WORLD CITIES</h1>
+
 </div>
+
 
 <!-- 🚀 SPLASH -->
+
 <div id="splash">
+
     <h1>🌍 World Cities</h1>
+
 </div>
 
+
 <!-- 🔥 HEADER -->
+
 <header class="header">
 
     <div class="logo-box">
@@ -56,6 +68,7 @@
         </p>
 
     </div>
+
 
     <div class="search-box">
 
@@ -79,18 +92,22 @@
 </header>
 
 
-
-</div>
-
 <!-- 🌍 CITY CONTAINER -->
+
 <div class="container" id="cityContainer"></div>
 
+
 <!-- 🔥 LIGHTBOX -->
+
 <div id="lightbox" class="lightbox">
 
     <span class="close-btn" id="closeBtn">×</span>
 
-    <button class="fav-btn" id="favBtn" type="button">
+    <button
+        class="fav-btn"
+        id="favBtn"
+        type="button"
+    >
         ❤️
     </button>
 
@@ -98,10 +115,18 @@
 
 </div>
 
+
 <!-- 🗺️ MAP -->
-<iframe id="mapFrame" title="City Map"></iframe>
+
+<iframe
+    id="mapFrame"
+    title="City Map"
+>
+</iframe>
+
 
 <!-- 🤖 CHAT -->
+
 <div id="chatBox">
 
     <div id="messages"></div>
@@ -112,20 +137,30 @@
         placeholder="Ask AI about cities..."
     >
 
-    <button id="sendBtn" type="button">
+    <button
+        id="sendBtn"
+        type="button"
+    >
         Send
     </button>
 
-    <button id="voiceBtn" type="button">
+    <button
+        id="voiceBtn"
+        type="button"
+    >
         🎤
     </button>
 
 </div>
 
+
 <!-- 🌎 GLOBE -->
+
 <div id="globeViz"></div>
 
+
 <!-- 🛰️ NASA -->
+
 <section class="nasa-section">
 
     <h2 class="section-title">
@@ -157,35 +192,61 @@
     </div>
 
 </section>
-<img id="nasaImg" width="100%" alt="NASA">
+
+
+<img
+    id="nasaImg"
+    width="100%"
+    alt="NASA"
+>
+
 
 <!-- 🌍 CESIUM -->
+
 <div id="cesiumContainer"></div>
 
+
 <!-- 📥 DOWNLOAD -->
-<button id="downloadBtn" type="button">
+
+<button
+    id="downloadBtn"
+    type="button"
+>
     📥 Download
 </button>
 
+
 <!-- 📤 UPLOAD -->
+
 <input
     type="file"
     id="uploadInput"
     accept="image/*"
 >
 
-<button id="uploadBtn" type="button">
+<button
+    id="uploadBtn"
+    type="button"
+>
     📤 Upload Photo
 </button>
 
 <div id="userGallery"></div>
 
+
 <!-- ❤️ LIKE -->
-<button class="like-btn" id="likeBtn" type="button">
+
+<button
+    class="like-btn"
+    id="likeBtn"
+    type="button"
+>
     ❤️ <span>0</span>
 </button>
 
+
 <!-- 💬 COMMENTS -->
+
 <div class="comments">
 
     <input
@@ -194,7 +255,10 @@
         class="commentInput"
     >
 
-    <button id="commentBtn" type="button">
+    <button
+        id="commentBtn"
+        type="button"
+    >
         Send
     </button>
 
@@ -202,7 +266,9 @@
 
 </div>
 
+
 <!-- 👤 LOGIN -->
+
 <div class="login-box">
 
     <input
@@ -211,62 +277,154 @@
         placeholder="Username"
     >
 
-    <button id="loginBtn" type="button">
+    <button
+        id="loginBtn"
+        type="button"
+    >
         Login
     </button>
 
 </div>
 
-<!-- 📸 CAMERA -->
-<video id="camera" autoplay></video>
 
-<button id="captureBtn" type="button">
+<!-- 📸 CAMERA -->
+
+<video
+    id="camera"
+    autoplay
+    playsinline
+>
+</video>
+
+<button
+    id="captureBtn"
+    type="button"
+>
     📸 Capture
 </button>
 
 <canvas id="canvas"></canvas>
 
-<!-- 🎥 VIDEO -->
-<input
-    type="file"
-    accept="video/*"
-    id="videoUpload"
->
 
+<!-- 🎥 VIDEO UPLOAD -->
+
+<section class="video-section">
+
+    <h2 class="section-title">
+        🎥 World Cities Video Gallery
+    </h2>
+
+    <div class="video-upload-box">
+
+        <input
+            type="file"
+            accept="video/*"
+            id="videoUpload"
+        >
+
+        <button
+            id="videoUploadBtn"
+            type="button"
+        >
+            📤 Upload Video
+        </button>
+
+    </div>
+
+
+    <!-- 🔍 VIDEO SEARCH -->
+
+    <div class="video-search-box">
+
+        <input
+            type="text"
+            id="videoSearch"
+            placeholder="🔍 Search video..."
+        >
+
+    </div>
+
+
+    <!-- 🎥 VIDEO PLAYER -->
+
+    <div
+        id="videoPlayerBox"
+        class="video-player-box"
+        style="display:none;"
+    >
+
+        <button
+            id="closeVideoBtn"
+            type="button"
+        >
+            ❌ Close
+        </button>
+
+        <h3 id="currentVideoTitle">
+            Video
+        </h3>
+
+        <video
+            id="mainVideoPlayer"
+            controls
+            playsinline
+            preload="metadata"
+        >
+        </video>
+
+    </div>
+
+
+    <!-- 🎥 VIDEO LIST -->
+
+    <div
+        id="videoGallery"
+        class="video-gallery"
+    >
+    </div>
+
+</section>
 
 
 <!-- 🎮 QUIZ -->
-<button class="quiz-btn" id="quizBtn" type="button">
+
+<button
+    class="quiz-btn"
+    id="quizBtn"
+    type="button"
+>
     🎮 Start Quiz
 </button>
 
+
 <!-- 🌧️ WEATHER -->
+
 <iframe
     width="100%"
     height="500"
     src="https://embed.windy.com/embed2.html"
     title="Weather"
-></iframe>
+>
+</iframe>
+
 
 <!-- 🌐 TRANSLATE -->
+
 <div id="google_translate_element"></div>
 
 
-
 <!-- 📱 BOTTOM NAV -->
- ```html
-<!-- 🎥 VIDEO GALLERY -->
-<section class="video-section">
 
-    
-
-
-           
+<div class="bottom-nav">
 
 </div>
+
+
 <script>
 
-/* 🌍 CITY DATA */
+/* ================================================= */
+/* 🌍 CITY DATA                                      */
+/* ================================================= */
 
 const cities = [
 
@@ -291,307 +449,355 @@ const cities = [
         "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200"
     },
 
-    
     {
         name: "London",
         country: "UK",
         image:
         "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200"
     },
-{
+
+    {
         name: "Kigali",
         country: "Rwanda",
-        image: "https://images.unsplash.com/photo-1618828665011-0abd973f7bb8?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1618828665011-0abd973f7bb8?w=1200"
     },
 
     {
         name: "Nairobi",
         country: "Kenya",
-        image: "https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=1200"
     },
 
     {
         name: "Kampala",
         country: "Uganda",
-        image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1200"
     },
 
     {
         name: "Addis Ababa",
         country: "Ethiopia",
-        image: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?w=1200"
     },
 
     {
         name: "Cairo",
         country: "Egypt",
-        image: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=1200"
     },
 
     {
         name: "Paris",
         country: "France",
-        image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200"
     },
 
     {
         name: "London",
         country: "UK",
-        image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200"
     },
 
     {
         name: "Rome",
         country: "Italy",
-        image: "https://images.unsplash.com/photo-1529260830199-42c24126f198?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1529260830199-42c24126f198?w=1200"
     },
 
     {
         name: "Madrid",
         country: "Spain",
-        image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200"
     },
 
     {
         name: "Berlin",
         country: "Germany",
-        image: "https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1200"
     },
 
     {
         name: "Amsterdam",
         country: "Netherlands",
-        image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=1200"
     },
 
     {
         name: "Vienna",
         country: "Austria",
-        image: "https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=1200"
     },
 
     {
         name: "Prague",
         country: "Czech Republic",
-        image: "https://images.unsplash.com/photo-1541849546-216549ae216d?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1541849546-216549ae216d?w=1200"
     },
 
     {
         name: "Athens",
         country: "Greece",
-        image: "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=1200"
     },
 
     {
         name: "Lisbon",
         country: "Portugal",
-        image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200"
     },
 
     {
         name: "Brussels",
         country: "Belgium",
-        image: "https://images.unsplash.com/photo-1559113513-d5e09c1c8e4b?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1559113513-d5e09c1c8e4b?w=1200"
     },
 
     {
         name: "Stockholm",
         country: "Sweden",
-        image: "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=1200"
     },
 
     {
         name: "Oslo",
         country: "Norway",
-        image: "https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=1200"
     },
 
     {
         name: "Copenhagen",
         country: "Denmark",
-        image: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=1200"
     },
 
     {
         name: "Helsinki",
         country: "Finland",
-        image: "https://images.unsplash.com/photo-1555009308-5f3f9f5b7b8d?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1555009308-5f3f9f5b7b8d?w=1200"
     },
 
     {
         name: "Reykjavik",
         country: "Iceland",
-        image: "https://images.unsplash.com/photo-1520769945061-0a448c463865?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1520769945061-0a448c463865?w=1200"
     },
 
     {
         name: "Tokyo",
         country: "Japan",
-        image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200"
     },
 
     {
         name: "Beijing",
         country: "China",
-        image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1200"
     },
 
     {
         name: "Seoul",
         country: "South Korea",
-        image: "https://images.unsplash.com/photo-1538485399081-7c897c3d6f7c?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1538485399081-7c897c3d6f7c?w=1200"
     },
 
     {
         name: "Bangkok",
         country: "Thailand",
-        image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=1200"
     },
 
     {
         name: "Singapore",
         country: "Singapore",
-        image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1200"
     },
 
     {
         name: "Kuala Lumpur",
         country: "Malaysia",
-        image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1200"
     },
 
     {
         name: "Jakarta",
         country: "Indonesia",
-        image: "https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=1200"
     },
 
     {
         name: "Manila",
         country: "Philippines",
-        image: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
     },
 
     {
         name: "New Delhi",
         country: "India",
-        image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1200"
     },
 
     {
         name: "Kathmandu",
         country: "Nepal",
-        image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200"
     },
 
     {
         name: "Islamabad",
         country: "Pakistan",
-        image: "https://images.unsplash.com/photo-1591025382268-3b4e7f6c5e1a?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1591025382268-3b4e7f6c5e1a?w=1200"
     },
 
     {
         name: "Abu Dhabi",
         country: "UAE",
-        image: "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?w=1200"
     },
 
     {
         name: "Dubai",
         country: "UAE",
-        image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200"
     },
-
-
-    
 
     {
         name: "Washington D.C.",
         country: "USA",
-        image: "https://images.unsplash.com/photo-1501466044931-62695aada8e9?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1501466044931-62695aada8e9?w=1200"
     },
 
     {
         name: "Ottawa",
         country: "Canada",
-        image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200"
     },
 
     {
         name: "Mexico City",
         country: "Mexico",
-        image: "https://images.unsplash.com/photo-1518659526054-190340b32735?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1518659526054-190340b32735?w=1200"
     },
 
     {
         name: "Brasilia",
         country: "Brazil",
-        image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200"
     },
 
     {
         name: "Buenos Aires",
         country: "Argentina",
-        image: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=1200"
     },
 
     {
         name: "Santiago",
         country: "Chile",
-        image: "https://images.unsplash.com/photo-1478827387698-1527781a4887?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1478827387698-1527781a4887?w=1200"
     },
 
     {
         name: "Lima",
         country: "Peru",
-        image: "https://images.unsplash.com/photo-1531968455001-5c5272a41129?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1531968455001-5c5272a41129?w=1200"
     },
 
     {
         name: "Bogota",
         country: "Colombia",
-        image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200"
     },
 
     {
         name: "Montevideo",
         country: "Uruguay",
-        image: "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?w=1200"
     },
 
     {
         name: "Canberra",
         country: "Australia",
-        image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200"
     },
 
     {
         name: "Wellington",
         country: "New Zealand",
-        image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=1200"
     },
 
     {
         name: "Pretoria",
         country: "South Africa",
-        image: "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=1200"
     },
 
     {
         name: "Abuja",
         country: "Nigeria",
-        image: "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=1200"
+        image:
+        "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=1200"
     },
 
     {
         name: "Accra",
         country: "Ghana",
-        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200"
-    },
-    
+        image:
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200"
+    }
+
 ];
 
-/* 🔥 ELEMENTS */
+
+/* ================================================= */
+/* 🔥 ELEMENTS                                      */
+/* ================================================= */
 
 const container =
 document.getElementById("cityContainer");
@@ -606,7 +812,9 @@ const searchInput =
 document.getElementById("searchInput");
 
 
-/* ❤️ FAVORITES */
+/* ================================================= */
+/* ❤️ FAVORITES                                     */
+/* ================================================= */
 
 let favorites =
 JSON.parse(
@@ -614,7 +822,9 @@ JSON.parse(
 ) || [];
 
 
-/* 📌 CURRENT CITY LIST */
+/* ================================================= */
+/* 📌 CURRENT CITY LIST                              */
+/* ================================================= */
 
 let currentCities = cities;
 
@@ -667,7 +877,6 @@ function displayCities(list) {
 
     });
 
-    /* OPEN LIGHTBOX */
 
     container
     .querySelectorAll(".card img")
@@ -680,6 +889,7 @@ function displayCities(list) {
             );
 
         });
+
 
         let timer;
 
@@ -695,6 +905,7 @@ function displayCities(list) {
 
         });
 
+
         img.addEventListener("touchend", () => {
 
             clearTimeout(timer);
@@ -703,8 +914,6 @@ function displayCities(list) {
 
     });
 
-
-    /* DOWNLOAD BUTTONS */
 
     container
     .querySelectorAll(".card-download")
@@ -730,26 +939,29 @@ function displayCities(list) {
 
 function searchCity(value) {
 
-    let q = value.toLowerCase().trim();
+    let q =
+        value
+        .toLowerCase()
+        .trim();
 
     let filtered =
-    cities.filter(city => {
+        cities.filter(city => {
 
-        return (
+            return (
 
-            city.name
-            .toLowerCase()
-            .includes(q)
+                city.name
+                .toLowerCase()
+                .includes(q)
 
-            ||
+                ||
 
-            city.country
-            .toLowerCase()
-            .includes(q)
+                city.country
+                .toLowerCase()
+                .includes(q)
 
-        );
+            );
 
-    });
+        });
 
     displayCities(filtered);
 
@@ -901,6 +1113,7 @@ lightbox.addEventListener(
     }
 );
 
+
 lightbox.addEventListener(
     "touchend",
     e => {
@@ -931,7 +1144,9 @@ lightbox.addEventListener(
 function toggleFavorite(event) {
 
     if (event) {
+
         event.stopPropagation();
+
     }
 
     if (!currentCities.length) return;
@@ -1024,7 +1239,10 @@ function loadMap(cityName) {
 async function askAI() {
 
     let input =
-        document.getElementById("userInput").value.trim();
+        document
+        .getElementById("userInput")
+        .value
+        .trim();
 
     if (!input) return;
 
@@ -1037,114 +1255,193 @@ async function askAI() {
     let reply =
         "🌍 Ask me about a city, country, capital, location, weather, population, timezone or famous places.";
 
-    /*
-    ==========================================
-    🌍 CITY KNOWLEDGE
-    ==========================================
-    */
 
     const cityData = {
 
         kigali: {
+
             city: "Kigali",
+
             country: "Rwanda",
+
             capital: true,
-            description: "Kigali is the capital city of Rwanda 🇷🇼",
-            location: "Central Rwanda",
-            famous: "Known for its clean streets, hills and Kigali Convention Centre."
+
+            description:
+            "Kigali is the capital city of Rwanda 🇷🇼",
+
+            location:
+            "Central Rwanda",
+
+            famous:
+            "Known for its clean streets, hills and Kigali Convention Centre."
+
         },
+
 
         paris: {
+
             city: "Paris",
+
             country: "France",
+
             capital: true,
-            description: "Paris is the capital city of France 🇫🇷",
-            location: "Northern France",
-            famous: "Famous for the Eiffel Tower, Louvre Museum and River Seine."
+
+            description:
+            "Paris is the capital city of France 🇫🇷",
+
+            location:
+            "Northern France",
+
+            famous:
+            "Famous for the Eiffel Tower, Louvre Museum and River Seine."
+
         },
+
 
         london: {
+
             city: "London",
+
             country: "United Kingdom",
+
             capital: true,
-            description: "London is the capital city of the United Kingdom 🇬🇧",
-            location: "Southern England",
-            famous: "Famous for Big Ben, Tower Bridge and Buckingham Palace."
+
+            description:
+            "London is the capital city of the United Kingdom 🇬🇧",
+
+            location:
+            "Southern England",
+
+            famous:
+            "Famous for Big Ben, Tower Bridge and Buckingham Palace."
+
         },
 
+
         tokyo: {
+
             city: "Tokyo",
+
             country: "Japan",
+
             capital: true,
-            description: "Tokyo is the capital city of Japan 🇯🇵",
-            location: "Eastern Japan",
-            famous: "Known for Tokyo Tower, Shibuya and modern technology."
+
+            description:
+            "Tokyo is the capital city of Japan 🇯🇵",
+
+            location:
+            "Eastern Japan",
+
+            famous:
+            "Known for Tokyo Tower, Shibuya and modern technology."
+
         },
+
 
         cairo: {
+
             city: "Cairo",
+
             country: "Egypt",
+
             capital: true,
-            description: "Cairo is the capital city of Egypt 🇪🇬",
-            location: "Northern Egypt",
-            famous: "Known for the Pyramids of Giza and the Nile River."
+
+            description:
+            "Cairo is the capital city of Egypt 🇪🇬",
+
+            location:
+            "Northern Egypt",
+
+            famous:
+            "Known for the Pyramids of Giza and the Nile River."
+
         },
+
 
         nairobi: {
+
             city: "Nairobi",
+
             country: "Kenya",
+
             capital: true,
-            description: "Nairobi is the capital city of Kenya 🇰🇪",
-            location: "East Africa",
-            famous: "Known for Nairobi National Park and its modern city centre."
+
+            description:
+            "Nairobi is the capital city of Kenya 🇰🇪",
+
+            location:
+            "East Africa",
+
+            famous:
+            "Known for Nairobi National Park and its modern city centre."
+
         },
+
 
         kampala: {
+
             city: "Kampala",
+
             country: "Uganda",
+
             capital: true,
-            description: "Kampala is the capital city of Uganda 🇺🇬",
-            location: "Central Uganda",
-            famous: "One of the major cities of East Africa."
+
+            description:
+            "Kampala is the capital city of Uganda 🇺🇬",
+
+            location:
+            "Central Uganda",
+
+            famous:
+            "One of the major cities of East Africa."
+
         },
 
-        tokyo: {
-            city: "Tokyo",
-            country: "Japan",
-            capital: true,
-            description: "Tokyo is the capital city of Japan 🇯🇵",
-            location: "Eastern Japan",
-            famous: "Famous for Shibuya, Tokyo Tower and modern technology."
-        },
 
         dubai: {
+
             city: "Dubai",
+
             country: "United Arab Emirates",
+
             capital: false,
-            description: "Dubai is a major city in the United Arab Emirates 🇦🇪",
-            location: "Persian Gulf",
-            famous: "Famous for Burj Khalifa, luxury shopping and modern architecture."
+
+            description:
+            "Dubai is a major city in the United Arab Emirates 🇦🇪",
+
+            location:
+            "Persian Gulf",
+
+            famous:
+            "Famous for Burj Khalifa, luxury shopping and modern architecture."
+
         },
 
+
         newyork: {
+
             city: "New York",
+
             country: "United States",
+
             capital: false,
-            description: "New York City is one of the world's major cities 🇺🇸",
-            location: "Northeastern United States",
-            famous: "Famous for Times Square, Statue of Liberty and Central Park."
+
+            description:
+            "New York City is one of the world's major cities 🇺🇸",
+
+            location:
+            "Northeastern United States",
+
+            famous:
+            "Famous for Times Square, Statue of Liberty and Central Park."
+
         }
 
     };
 
 
-    /*
-    ==========================================
-    🔎 FIND CITY
-    ==========================================
-    */
-
     let foundCity = null;
+
 
     for (const key in cityData) {
 
@@ -1154,15 +1451,11 @@ async function askAI() {
                 cityData[key];
 
             break;
+
         }
+
     }
 
-
-    /*
-    ==========================================
-    🌍 CITY RESPONSE
-    ==========================================
-    */
 
     if (foundCity) {
 
@@ -1183,8 +1476,14 @@ async function askAI() {
 
             reply =
                 foundCity.capital
-                ? `🏛️ Yes. ${foundCity.city} is the capital of ${foundCity.country}.`
-                : `🏙️ ${foundCity.city} is not the capital of ${foundCity.country}.`;
+
+                ?
+
+                `🏛️ Yes. ${foundCity.city} is the capital of ${foundCity.country}.`
+
+                :
+
+                `🏙️ ${foundCity.city} is not the capital of ${foundCity.country}.`;
 
         }
 
@@ -1220,6 +1519,7 @@ async function askAI() {
 
     }
 
+
     else if (
         lower.includes("cities") ||
         lower.includes("city")
@@ -1229,6 +1529,7 @@ async function askAI() {
             "🌍 I can help you explore cities around the world. Try asking: Where is Kigali? Is Paris a capital? What is London famous for?";
 
     }
+
 
     else if (
         lower.includes("capital cities") ||
@@ -1240,6 +1541,7 @@ async function askAI() {
 
     }
 
+
     else if (
         lower.includes("hello") ||
         lower.includes("hi")
@@ -1250,12 +1552,6 @@ async function askAI() {
 
     }
 
-
-    /*
-    ==========================================
-    💬 SHOW MESSAGE
-    ==========================================
-    */
 
     messages.innerHTML += `
 
@@ -1271,29 +1567,17 @@ async function askAI() {
 
             <b>🤖 AI:</b>
 
-            ${reply}
+            ${escapeAIText(reply)}
 
         </div>
 
     `;
 
 
-    /*
-    ==========================================
-    🧹 CLEAR INPUT
-    ==========================================
-    */
-
     document.getElementById(
         "userInput"
     ).value = "";
 
-
-    /*
-    ==========================================
-    📜 SCROLL TO NEW MESSAGE
-    ==========================================
-    */
 
     messages.scrollTop =
         messages.scrollHeight;
@@ -1301,11 +1585,9 @@ async function askAI() {
 }
 
 
-/*
-==========================================
-🔐 PROTECT USER INPUT
-==========================================
-*/
+/* ==========================================
+   🔐 PROTECT USER INPUT
+   ========================================== */
 
 function escapeAIText(text) {
 
@@ -1316,13 +1598,8 @@ function escapeAIText(text) {
         text;
 
     return div.innerHTML;
+
 }
-
-    document.getElementById(
-        "userInput"
-    ).value = "";
-
-
 
 
 /* ================================================= */
@@ -1345,10 +1622,14 @@ function startVoice() {
 
     }
 
+
     const recognition =
         new SpeechRecognition();
 
-    recognition.lang = "en-US";
+
+    recognition.lang =
+        "en-US";
+
 
     recognition.onresult =
     function(event) {
@@ -1363,6 +1644,7 @@ function startVoice() {
         askAI();
 
     };
+
 
     recognition.start();
 
@@ -1390,7 +1672,9 @@ function playSound(type) {
 
         );
 
-    audio.play().catch(() => {});
+    audio
+        .play()
+        .catch(() => {});
 
 }
 
@@ -1406,16 +1690,21 @@ function uploadImage() {
             "uploadInput"
         ).files[0];
 
+
     if (!file) {
 
-        alert("Please select an image first.");
+        alert(
+            "Please select an image first."
+        );
 
         return;
 
     }
 
+
     const reader =
         new FileReader();
+
 
     reader.onload =
     function(e) {
@@ -1423,21 +1712,26 @@ function uploadImage() {
         const img =
             document.createElement("img");
 
+
         img.src =
             e.target.result;
+
 
         img.alt =
             "Uploaded image";
 
+
         document
             .getElementById("userGallery")
             .appendChild(img);
+
 
         saveImage(
             e.target.result
         );
 
     };
+
 
     reader.readAsDataURL(file);
 
@@ -1453,7 +1747,9 @@ function saveImage(src) {
             localStorage.getItem("userImages")
         ) || [];
 
+
     images.push(src);
+
 
     localStorage.setItem(
         "userImages",
@@ -1472,15 +1768,20 @@ function loadSavedImages() {
             localStorage.getItem("userImages")
         ) || [];
 
+
     images.forEach(src => {
 
         const img =
             document.createElement("img");
 
-        img.src = src;
+
+        img.src =
+            src;
+
 
         img.alt =
             "Saved image";
+
 
         document
             .getElementById("userGallery")
@@ -1500,6 +1801,7 @@ function likePost(btn) {
     let count =
         btn.querySelector("span");
 
+
     count.innerText =
         parseInt(
             count.innerText || "0"
@@ -1517,27 +1819,34 @@ function addComment(btn) {
     const parent =
         btn.parentElement;
 
+
     const input =
         parent.querySelector(
             ".commentInput"
         );
+
 
     const list =
         parent.querySelector(
             ".commentList"
         );
 
+
     if (
         input.value.trim() === ""
     ) return;
 
+
     const p =
         document.createElement("p");
+
 
     p.innerText =
         input.value;
 
+
     list.appendChild(p);
+
 
     input.value = "";
 
@@ -1555,18 +1864,23 @@ function login() {
             "username"
         ).value.trim();
 
+
     if (!username) {
 
-        alert("Please enter username.");
+        alert(
+            "Please enter username."
+        );
 
         return;
 
     }
 
+
     localStorage.setItem(
         "user",
         username
     );
+
 
     alert(
         "Welcome " + username
@@ -1593,6 +1907,7 @@ function startCamera() {
         return;
 
     }
+
 
     navigator.mediaDevices
     .getUserMedia({
@@ -1626,8 +1941,10 @@ function takePhoto() {
     const video =
         document.getElementById("camera");
 
+
     const canvas =
         document.getElementById("canvas");
+
 
     if (
         !video.videoWidth ||
@@ -1642,19 +1959,471 @@ function takePhoto() {
 
     }
 
+
     const ctx =
         canvas.getContext("2d");
+
 
     canvas.width =
         video.videoWidth;
 
+
     canvas.height =
         video.videoHeight;
+
 
     ctx.drawImage(
         video,
         0,
         0
+    );
+
+}
+
+
+/* ================================================= */
+/* 🎥 VIDEO SYSTEM                                  */
+/* ================================================= */
+
+let videos =
+    JSON.parse(
+        localStorage.getItem("worldCitiesVideos")
+    ) || [];
+
+
+const videoUpload =
+document.getElementById("videoUpload");
+
+const videoUploadBtn =
+document.getElementById("videoUploadBtn");
+
+const videoGallery =
+document.getElementById("videoGallery");
+
+const videoSearch =
+document.getElementById("videoSearch");
+
+const videoPlayerBox =
+document.getElementById("videoPlayerBox");
+
+const mainVideoPlayer =
+document.getElementById("mainVideoPlayer");
+
+const currentVideoTitle =
+document.getElementById("currentVideoTitle");
+
+const closeVideoBtn =
+document.getElementById("closeVideoBtn");
+
+
+/* ================================================= */
+/* 🎥 SAVE VIDEOS                                   */
+/* ================================================= */
+
+function saveVideos() {
+
+    try {
+
+        localStorage.setItem(
+            "worldCitiesVideos",
+            JSON.stringify(videos)
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Video storage error:",
+            error
+        );
+
+        alert(
+            "This video is too large for browser storage. Try a smaller video."
+        );
+
+    }
+
+}
+
+
+/* ================================================= */
+/* 📤 UPLOAD VIDEO                                  */
+/* ================================================= */
+
+function uploadVideo() {
+
+    const file =
+        videoUpload.files[0];
+
+
+    if (!file) {
+
+        alert(
+            "Please select a video first."
+        );
+
+        return;
+
+    }
+
+
+    if (!file.type.startsWith("video/")) {
+
+        alert(
+            "Please select a valid video file."
+        );
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+    function(event) {
+
+        const videoData = {
+
+            id:
+                Date.now(),
+
+            name:
+                file.name,
+
+            type:
+                file.type,
+
+            size:
+                file.size,
+
+            data:
+                event.target.result,
+
+            date:
+                new Date().toLocaleString()
+
+        };
+
+
+        videos.push(
+            videoData
+        );
+
+
+        saveVideos();
+
+
+        displayVideos();
+
+
+        videoUpload.value = "";
+
+
+        alert(
+            "🎥 Video uploaded successfully!"
+        );
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* ================================================= */
+/* 🎥 DISPLAY VIDEOS                                */
+/* ================================================= */
+
+function displayVideos(list = videos) {
+
+    videoGallery.innerHTML = "";
+
+
+    if (!list.length) {
+
+        videoGallery.innerHTML = `
+
+            <div class="no-videos">
+
+                <h3>🎥 No videos yet</h3>
+
+                <p>
+                    Upload a video to start your
+                    World Cities Video Gallery.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(video => {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "video-card";
+
+
+        card.innerHTML = `
+
+            <div class="video-thumbnail">
+
+                <video
+                    src="${video.data}"
+                    preload="metadata"
+                    muted
+                >
+                </video>
+
+            </div>
+
+
+            <div class="video-card-content">
+
+                <h3>
+                    🎬 ${escapeAIText(video.name)}
+                </h3>
+
+                <p>
+                    📅 ${escapeAIText(video.date)}
+                </p>
+
+
+                <div class="video-buttons">
+
+                    <button
+                        type="button"
+                        class="watch-video-btn"
+                    >
+                        ▶️ Watch Video
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="delete-video-btn"
+                    >
+                        🗑️ Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        const watchButton =
+            card.querySelector(
+                ".watch-video-btn"
+            );
+
+
+        const deleteButton =
+            card.querySelector(
+                ".delete-video-btn"
+            );
+
+
+        watchButton.addEventListener(
+            "click",
+            () => {
+
+                playVideo(
+                    video
+                );
+
+            }
+        );
+
+
+        deleteButton.addEventListener(
+            "click",
+            () => {
+
+                deleteVideo(
+                    video.id
+                );
+
+            }
+        );
+
+
+        videoGallery.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+/* ================================================= */
+/* ▶️ PLAY VIDEO                                    */
+/* ================================================= */
+
+function playVideo(video) {
+
+    currentVideoTitle.textContent =
+        "🎬 " + video.name;
+
+
+    mainVideoPlayer.src =
+        video.data;
+
+
+    videoPlayerBox.style.display =
+        "block";
+
+
+    videoPlayerBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    mainVideoPlayer
+        .play()
+        .catch(() => {});
+
+}
+
+
+/* ================================================= */
+/* ❌ CLOSE VIDEO                                    */
+/* ================================================= */
+
+function closeVideoPlayer() {
+
+    mainVideoPlayer.pause();
+
+    mainVideoPlayer.removeAttribute(
+        "src"
+    );
+
+    mainVideoPlayer.load();
+
+
+    videoPlayerBox.style.display =
+        "none";
+
+}
+
+
+/* ================================================= */
+/* 🗑️ DELETE VIDEO                                  */
+/* ================================================= */
+
+function deleteVideo(id) {
+
+    const confirmDelete =
+        confirm(
+            "Are you sure you want to delete this video?"
+        );
+
+
+    if (!confirmDelete) {
+
+        return;
+
+    }
+
+
+    videos =
+        videos.filter(
+            video =>
+                video.id !== id
+        );
+
+
+    saveVideos();
+
+
+    displayVideos();
+
+
+    closeVideoPlayer();
+
+}
+
+
+/* ================================================= */
+/* 🔍 SEARCH VIDEO                                  */
+/* ================================================= */
+
+function searchVideos(value) {
+
+    const query =
+        value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        videos.filter(video => {
+
+            return video.name
+                .toLowerCase()
+                .includes(query);
+
+        });
+
+
+    displayVideos(
+        filtered
+    );
+
+}
+
+
+/* ================================================= */
+/* 🎥 VIDEO EVENTS                                  */
+/* ================================================= */
+
+videoUploadBtn.addEventListener(
+    "click",
+    uploadVideo
+);
+
+
+closeVideoBtn.addEventListener(
+    "click",
+    closeVideoPlayer
+);
+
+
+videoSearch.addEventListener(
+    "input",
+    function(event) {
+
+        searchVideos(
+            event.target.value
+        );
+
+    }
+);
+
+
+/* ================================================= */
+/* 🎮 QUIZ                                          */
+/* ================================================= */
+
+function startQuiz() {
+
+    alert(
+        "🌍 World Cities Quiz is ready!"
     );
 
 }
@@ -1668,13 +2437,23 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+
         /* Display cities */
 
-        displayCities(cities);
+        displayCities(
+            cities
+        );
+
 
         /* Load saved images */
 
         loadSavedImages();
+
+
+        /* Display saved videos */
+
+        displayVideos();
+
 
         /* Search */
 
@@ -1798,20 +2577,54 @@ document.addEventListener(
             );
 
 
+        /* Quiz */
+
+        const quizButton =
+            document.getElementById(
+                "quizBtn"
+            );
+
+
+        if (quizButton) {
+
+            quizButton.addEventListener(
+                "click",
+                startQuiz
+            );
+
+        }
+
+
         /* Start camera */
 
         startCamera();
 
+    }
+);
 
 
-                }
-            );
+/* ================================================= */
+/* ================= ENTER KEY ===================== */
+/* ================================================= */
 
+document
+    .getElementById("userInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
 
+            if (event.key === "Enter") {
 
+                askAI();
+
+            }
+
+        }
+    );
 
 
 </script>
 
 </body>
 </html>
+```
