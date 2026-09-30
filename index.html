@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,15 +71,19 @@
 
     <div class="search-box">
 
-        <div class="search-box">
-    <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="🔍 Search city or country..."
-        autocomplete="off"
-    >
-    <button id="clearSearch" type="button">✕</button>
-</div>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search city or country..."
+            autocomplete="off"
+        >
+
+        <button
+            id="clearSearch"
+            type="button"
+        >
+            ✕
+        </button>
 
         <button
             class="theme-btn"
@@ -134,47 +137,103 @@
 
     <div id="messages"></div>
 
-    <!-- =========================
-     AI LOCATION ASSISTANT
-     Put this HTML where you want the AI chat to appear
-========================= -->
 
-<section id="aiLocationAssistant" class="ai-location-assistant">
+    <!-- =================================================
+         AI LOCATION ASSISTANT
+    ================================================== -->
 
-    <div class="ai-header">
-        <div>
-            <h2>🤖 AI Location Assistant</h2>
-            <p>Ask about cities, countries, locations and places.</p>
+    <section
+        id="aiLocationAssistant"
+        class="ai-location-assistant"
+    >
+
+        <div class="ai-header">
+
+            <div>
+
+                <h2>
+                    🤖 AI Location Assistant
+                </h2>
+
+                <p>
+                    Ask about cities, countries, locations and places.
+                </p>
+
+            </div>
+
+            <span id="aiStatus">
+                ● Ready
+            </span>
+
         </div>
-        <span id="aiStatus">● Ready</span>
-    </div>
 
-    <div id="aiMessages" class="ai-messages">
-        <div class="ai-message ai-bot">
-            👋 Hello! Ask me about a city, country, location, landmarks,
-            population, geography or other location information.
-        </div>
-    </div>
 
-    <div class="ai-search-results" id="aiSearchResults"></div>
-
-    <div class="ai-input-area">
-        <input
-            type="text"
-            id="aiQuestion"
-            placeholder="Ask about Kigali, Paris, Tokyo..."
-            autocomplete="off"
+        <div
+            id="aiMessages"
+            class="ai-messages"
         >
 
-      
-        </button>
-    </div>
+            <div class="ai-message ai-bot">
 
-</section>
- 
+                👋 Hello! Ask me about a city, country,
+                location, landmarks, population,
+                geography or other location information.
 
-});
+            </div>
+
+        </div>
+
+
+        <div
+            class="ai-search-results"
+            id="aiSearchResults"
+        >
+        </div>
+
+
+        <div class="ai-input-area">
+
+            <input
+                type="text"
+                id="aiQuestion"
+                placeholder="Ask about Kigali, Paris, Tokyo..."
+                autocomplete="off"
+            >
+
+            <button
+                id="sendButton"
+                type="button"
+            >
+                Send
+            </button>
+
+            <button
+                id="sendBtn"
+                type="button"
+            >
+                📤
+            </button>
+
+            <button
+                id="voiceBtn"
+                type="button"
+            >
+                🎤
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =================================================
+     AI STYLE
+================================================== -->
+
 <style>
+
 .ai-location-assistant {
     width: 100%;
     max-width: 900px;
@@ -257,7 +316,9 @@
     border-color: #0d6efd;
 }
 
-#aiSendButton {
+#sendButton,
+#sendBtn,
+#voiceBtn {
     border: none;
     background: #0d6efd;
     color: white;
@@ -266,7 +327,9 @@
     cursor: pointer;
 }
 
-#aiSendButton:hover {
+#sendButton:hover,
+#sendBtn:hover,
+#voiceBtn:hover {
     background: #084298;
 }
 
@@ -307,339 +370,15 @@
         flex-direction: column;
     }
 
-    #aiSendButton {
+    #sendButton,
+    #sendBtn,
+    #voiceBtn {
         width: 100%;
     }
+
 }
+
 </style>
-
-
-<script>
-/* =====================================================
-   AI LOCATION ASSISTANT
-   ===================================================== */
-
-const aiQuestion = document.getElementById("aiQuestion");
-const aiSendButton = document.getElementById("aiSendButton");
-const aiMessages = document.getElementById("aiMessages");
-const aiStatus = document.getElementById("aiStatus");
-const aiSearchResults = document.getElementById("aiSearchResults");
-
-
-/* Add message to chat */
-function addAIMessage(message, type = "bot") {
-
-    const div = document.createElement("div");
-
-    div.className =
-        type === "user"
-            ? "ai-message ai-user"
-            : "ai-message ai-bot";
-
-    div.textContent = message;
-
-    aiMessages.appendChild(div);
-
-    aiMessages.scrollTop = aiMessages.scrollHeight;
-}
-
-
-/* Search your existing cities array */
-function searchLocalCities(question) {
-
-    if (typeof cities === "undefined") {
-        return [];
-    }
-
-    const text = question.toLowerCase().trim();
-
-    return cities.filter(city => {
-
-        const name =
-            String(city.name || "").toLowerCase();
-
-        const country =
-            String(city.country || "").toLowerCase();
-
-        const description =
-            String(city.description || "").toLowerCase();
-
-        return (
-            name.includes(text) ||
-            country.includes(text) ||
-            description.includes(text) ||
-            text.includes(name) ||
-            text.includes(country)
-        );
-    });
-}
-
-
-/* Show local city information */
-function showLocalCityInformation(results) {
-
-    if (!results.length) {
-        return;
-    }
-
-    const city = results[0];
-
-    let information = "";
-
-    information += "📍 " + (city.name || "Unknown city");
-
-    if (city.country) {
-        information += "\n🌍 Country: " + city.country;
-    }
-
-    if (city.description) {
-        information += "\n\n" + city.description;
-    }
-
-    addAIMessage(information, "bot");
-}
-
-
-/* =====================================================
-   WEB SEARCH
-   ===================================================== */
-
-async function searchInternet(query) {
-
-    try {
-
-        const response = await fetch(
-            "/api/search?q=" +
-            encodeURIComponent(query)
-        );
-
-        if (!response.ok) {
-            throw new Error("Search failed");
-        }
-
-        const data = await response.json();
-
-        aiSearchResults.innerHTML = "";
-
-        if (!data.results || data.results.length === 0) {
-            return;
-        }
-
-        const title = document.createElement("h3");
-
-        title.textContent = "🔎 Web Search Results";
-
-        aiSearchResults.appendChild(title);
-
-
-        data.results.forEach(result => {
-
-            const card =
-                document.createElement("div");
-
-            card.className = "ai-search-card";
-
-
-            const link =
-                document.createElement("a");
-
-            link.href = result.url;
-
-            link.target = "_blank";
-
-            link.rel = "noopener noreferrer";
-
-            link.textContent =
-                result.title || "Open result";
-
-
-            const description =
-                document.createElement("p");
-
-            description.textContent =
-                result.snippet || "";
-
-
-            card.appendChild(link);
-
-            card.appendChild(description);
-
-            aiSearchResults.appendChild(card);
-
-        });
-
-    } catch (error) {
-
-        console.error("Web search error:", error);
-
-    }
-}
-
-
-/* =====================================================
-   AI REQUEST
-   ===================================================== */
-
-async function askAI(question) {
-
-    aiStatus.textContent = "● Thinking...";
-
-    try {
-
-        const response = await fetch(
-            "/api/ai",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    question: question
-                })
-            }
-        );
-
-
-        if (!response.ok) {
-            throw new Error("AI request failed");
-        }
-
-
-        const data =
-            await response.json();
-
-
-        if (data.answer) {
-
-            addAIMessage(
-                data.answer,
-                "bot"
-            );
-
-        } else {
-
-            addAIMessage(
-                "Sorry, I could not find an answer.",
-                "bot"
-            );
-
-        }
-
-    } catch (error) {
-
-        console.error(error);
-
-        addAIMessage(
-            "AI server is not connected yet. Check your backend.",
-            "bot"
-        );
-
-    } finally {
-
-        aiStatus.textContent =
-            "● Ready";
-    }
-}
-
-
-/* =====================================================
-   MAIN AI FUNCTION
-   ===================================================== */
-
-async function processAIQuestion() {
-
-    const question =
-        aiQuestion.value.trim();
-
-
-    if (!question) {
-        return;
-    }
-
-
-    addAIMessage(
-        question,
-        "user"
-    );
-
-
-    aiQuestion.value = "";
-
-
-    /*
-       First search your own cities database.
-    */
-
-    const localResults =
-        searchLocalCities(question);
-
-
-    if (localResults.length > 0) {
-
-        showLocalCityInformation(
-            localResults
-        );
-
-    }
-
-
-    /*
-       Then ask the AI.
-    */
-
-    await askAI(question);
-
-
-    /*
-       Search the Internet through backend.
-    */
-
-    await searchInternet(question);
-}
-
-
-/* Send button */
-
-aiSendButton.addEventListener(
-    "click",
-    processAIQuestion
-);
-
-
-/* Enter key */
-
-aiQuestion.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Enter") {
-
-            event.preventDefault();
-
-            processAIQuestion();
-
-        }
-
-    }
-);
-</script>
-
-    <button
-        id="sendBtn"
-        type="button"
-    >
-        Send
-    </button>
-
-    <button
-        id="voiceBtn"
-        type="button"
-    >
-    </button>
-
-</div>
 
 
 <!-- 🌎 GLOBE -->
@@ -674,7 +413,27 @@ aiQuestion.addEventListener(
 
         <img
             src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1200"
-            alt="Space"
+            alt="Space 1"
+        >
+
+        <img
+            src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200"
+            alt="Space 2"
+        >
+
+        <img
+            src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=1200"
+            alt="Space 3"
+        >
+
+        <img
+            src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200"
+            alt="Space 4"
+        >
+
+        <img
+            src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1200"
+            alt="Space 5"
         >
 
     </div>
@@ -747,6 +506,7 @@ aiQuestion.addEventListener(
         id="commentBtn"
         type="button"
     >
+        💬 Comment
     </button>
 
     <div class="commentList"></div>
@@ -906,6 +666,10 @@ aiQuestion.addEventListener(
 
 </div>
 
+
+<!-- =================================================
+     MAIN JAVASCRIPT
+================================================== -->
 
 <script>
 
@@ -1287,16 +1051,22 @@ const cities = [
 /* ================================================= */
 
 const container =
-document.getElementById("cityContainer");
+    document.getElementById("cityContainer");
 
 const lightbox =
-document.getElementById("lightbox");
+    document.getElementById("lightbox");
 
 const lightboxImg =
-document.getElementById("lightboxImg");
+    document.getElementById("lightboxImg");
 
 const searchInput =
-document.getElementById("searchInput");
+    document.getElementById("searchInput");
+
+const clearSearch =
+    document.getElementById("clearSearch");
+
+const cityContainer =
+    document.getElementById("cityContainer");
 
 
 /* ================================================= */
@@ -1304,9 +1074,9 @@ document.getElementById("searchInput");
 /* ================================================= */
 
 let favorites =
-JSON.parse(
-    localStorage.getItem("favorites")
-) || [];
+    JSON.parse(
+        localStorage.getItem("favorites")
+    ) || [];
 
 
 /* ================================================= */
@@ -1328,6 +1098,17 @@ function displayCities(list) {
 
     container.innerHTML = "";
 
+    if (!list.length) {
+
+        container.innerHTML = `
+            <div class="no-results">
+                🔍 No city found.
+            </div>
+        `;
+
+        return;
+    }
+
     list.forEach((city, index) => {
 
         container.innerHTML += `
@@ -1343,9 +1124,9 @@ function displayCities(list) {
 
             <div class="card-content">
 
-                <h3>${city.name}</h3>
+                <h3>${escapeAIText(city.name)}</h3>
 
-                <p>${city.country}</p>
+                <p>${escapeAIText(city.country)}</p>
 
                 <button
                     type="button"
@@ -1366,56 +1147,66 @@ function displayCities(list) {
 
 
     container
-    .querySelectorAll(".card img")
-    .forEach(img => {
+        .querySelectorAll(".card img")
+        .forEach(img => {
 
-        img.addEventListener("dblclick", () => {
-
-            openLightbox(
-                Number(img.dataset.index)
-            );
-
-        });
-
-
-        let timer;
-
-        img.addEventListener("touchstart", () => {
-
-            timer = setTimeout(() => {
+            img.addEventListener("dblclick", () => {
 
                 openLightbox(
                     Number(img.dataset.index)
                 );
 
-            }, 500);
-
-        });
+            });
 
 
-        img.addEventListener("touchend", () => {
+            let timer;
 
-            clearTimeout(timer);
+            img.addEventListener(
+                "touchstart",
+                () => {
 
-        });
+                    timer =
+                        setTimeout(() => {
 
-    });
+                            openLightbox(
+                                Number(img.dataset.index)
+                            );
+
+                        }, 500);
+
+                }
+            );
 
 
-    container
-    .querySelectorAll(".card-download")
-    .forEach(button => {
+            img.addEventListener(
+                "touchend",
+                () => {
 
-        button.addEventListener("click", () => {
+                    clearTimeout(timer);
 
-            downloadImage(
-                button.dataset.image,
-                button.dataset.city
+                }
             );
 
         });
 
-    });
+
+    container
+        .querySelectorAll(".card-download")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    downloadImage(
+                        button.dataset.image,
+                        button.dataset.city
+                    );
+
+                }
+            );
+
+        });
 
 }
 
@@ -1428,8 +1219,16 @@ function searchCity(value) {
 
     let q =
         value
-        .toLowerCase()
-        .trim();
+            .toLowerCase()
+            .trim();
+
+    if (q === "") {
+
+        displayCities(cities);
+
+        return;
+
+    }
 
     let filtered =
         cities.filter(city => {
@@ -1437,14 +1236,22 @@ function searchCity(value) {
             return (
 
                 city.name
-                .toLowerCase()
-                .includes(q)
+                    .toLowerCase()
+                    .includes(q)
 
                 ||
 
                 city.country
-                .toLowerCase()
-                .includes(q)
+                    .toLowerCase()
+                    .includes(q)
+
+                ||
+
+                String(
+                    city.description || ""
+                )
+                    .toLowerCase()
+                    .includes(q)
 
             );
 
@@ -1561,27 +1368,30 @@ function updateImage() {
 /* ================= KEYBOARD ====================== */
 /* ================================================= */
 
-document.addEventListener("keydown", e => {
+document.addEventListener(
+    "keydown",
+    e => {
 
-    if (e.key === "Escape") {
+        if (e.key === "Escape") {
 
-        closeLightbox();
+            closeLightbox();
+
+        }
+
+        if (e.key === "ArrowRight") {
+
+            nextImage();
+
+        }
+
+        if (e.key === "ArrowLeft") {
+
+            prevImage();
+
+        }
 
     }
-
-    if (e.key === "ArrowRight") {
-
-        nextImage();
-
-    }
-
-    if (e.key === "ArrowLeft") {
-
-        prevImage();
-
-    }
-
-});
+);
 
 
 /* ================================================= */
@@ -1713,6 +1523,8 @@ function loadMap(cityName) {
     let map =
         document.getElementById("mapFrame");
 
+    if (!map) return;
+
     map.src =
         `https://www.google.com/maps?q=${encodeURIComponent(cityName)}&output=embed`;
 
@@ -1723,18 +1535,12 @@ function loadMap(cityName) {
 /* ================= AI CHAT ======================= */
 /* ================================================= */
 
-async function askAI() {
+function askLocalAI(input) {
 
-    let input =
-        document
-        .getElementById("userInput")
-        .value
-        .trim();
-
-    if (!input) return;
-
-    let messages =
+    const messages =
         document.getElementById("messages");
+
+    if (!messages) return;
 
     let lower =
         input.toLowerCase();
@@ -1748,177 +1554,124 @@ async function askAI() {
         kigali: {
 
             city: "Kigali",
-
             country: "Rwanda",
-
             capital: true,
-
             description:
             "Kigali is the capital city of Rwanda 🇷🇼",
-
             location:
             "Central Rwanda",
-
             famous:
             "Known for its clean streets, hills and Kigali Convention Centre."
 
         },
 
-
         paris: {
 
             city: "Paris",
-
             country: "France",
-
             capital: true,
-
             description:
             "Paris is the capital city of France 🇫🇷",
-
             location:
             "Northern France",
-
             famous:
             "Famous for the Eiffel Tower, Louvre Museum and River Seine."
 
         },
 
-
         london: {
 
             city: "London",
-
             country: "United Kingdom",
-
             capital: true,
-
             description:
             "London is the capital city of the United Kingdom 🇬🇧",
-
             location:
             "Southern England",
-
             famous:
             "Famous for Big Ben, Tower Bridge and Buckingham Palace."
 
         },
 
-
         tokyo: {
 
             city: "Tokyo",
-
             country: "Japan",
-
             capital: true,
-
             description:
             "Tokyo is the capital city of Japan 🇯🇵",
-
             location:
             "Eastern Japan",
-
             famous:
             "Known for Tokyo Tower, Shibuya and modern technology."
 
         },
 
-
         cairo: {
 
             city: "Cairo",
-
             country: "Egypt",
-
             capital: true,
-
             description:
             "Cairo is the capital city of Egypt 🇪🇬",
-
             location:
             "Northern Egypt",
-
             famous:
             "Known for the Pyramids of Giza and the Nile River."
 
         },
 
-
         nairobi: {
 
             city: "Nairobi",
-
             country: "Kenya",
-
             capital: true,
-
             description:
             "Nairobi is the capital city of Kenya 🇰🇪",
-
             location:
             "East Africa",
-
             famous:
             "Known for Nairobi National Park and its modern city centre."
 
         },
 
-
         kampala: {
 
             city: "Kampala",
-
             country: "Uganda",
-
             capital: true,
-
             description:
             "Kampala is the capital city of Uganda 🇺🇬",
-
             location:
             "Central Uganda",
-
             famous:
             "One of the major cities of East Africa."
 
         },
 
-
         dubai: {
 
             city: "Dubai",
-
             country: "United Arab Emirates",
-
             capital: false,
-
             description:
             "Dubai is a major city in the United Arab Emirates 🇦🇪",
-
             location:
             "Persian Gulf",
-
             famous:
             "Famous for Burj Khalifa, luxury shopping and modern architecture."
 
         },
 
-
         newyork: {
 
             city: "New York",
-
             country: "United States",
-
             capital: false,
-
             description:
             "New York City is one of the world's major cities 🇺🇸",
-
             location:
             "Northeastern United States",
-
             famous:
             "Famous for Times Square, Statue of Liberty and Central Park."
 
@@ -2006,7 +1759,6 @@ async function askAI() {
 
     }
 
-
     else if (
         lower.includes("cities") ||
         lower.includes("city")
@@ -2017,7 +1769,6 @@ async function askAI() {
 
     }
 
-
     else if (
         lower.includes("capital cities") ||
         lower.includes("capitals")
@@ -2027,7 +1778,6 @@ async function askAI() {
             "🏛️ I can help you explore capital cities such as Kigali, Paris, London, Tokyo, Cairo, Nairobi, Kampala and many more.";
 
     }
-
 
     else if (
         lower.includes("hello") ||
@@ -2061,36 +1811,546 @@ async function askAI() {
     `;
 
 
-    document.getElementById(
-        "userInput"
-    ).value = "";
-
-
     messages.scrollTop =
         messages.scrollHeight;
 
 }
 
 
-/* ==========================================
-   🔐 PROTECT USER INPUT
-   ========================================== */
+/* ================================================= */
+/* 🤖 AI LOCATION ASSISTANT                         */
+/* ================================================= */
 
-function escapeAIText(text) {
+const aiQuestion =
+    document.getElementById("aiQuestion");
+
+const aiSendButton =
+    document.getElementById("sendButton");
+
+const aiMessages =
+    document.getElementById("aiMessages");
+
+const aiStatus =
+    document.getElementById("aiStatus");
+
+const aiSearchResults =
+    document.getElementById("aiSearchResults");
+
+
+/* ================================================= */
+/* ADD AI MESSAGE                                    */
+/* ================================================= */
+
+function addAIMessage(
+    message,
+    type = "bot"
+) {
+
+    if (!aiMessages) return;
 
     const div =
         document.createElement("div");
 
-    div.textContent =
-        text;
+    div.className =
+        type === "user"
+            ? "ai-message ai-user"
+            : "ai-message ai-bot";
 
-    return div.innerHTML;
+    div.textContent =
+        message;
+
+    aiMessages.appendChild(div);
+
+    aiMessages.scrollTop =
+        aiMessages.scrollHeight;
 
 }
 
 
 /* ================================================= */
-/* ================= SPEECH ======================== */
+/* LOCAL CITY SEARCH                                 */
+/* ================================================= */
+
+function searchLocalCities(question) {
+
+    if (
+        typeof cities === "undefined"
+    ) {
+
+        return [];
+
+    }
+
+    const text =
+        question
+            .toLowerCase()
+            .trim();
+
+    return cities.filter(city => {
+
+        const name =
+            String(
+                city.name || ""
+            ).toLowerCase();
+
+        const country =
+            String(
+                city.country || ""
+            ).toLowerCase();
+
+        const description =
+            String(
+                city.description || ""
+            ).toLowerCase();
+
+        return (
+
+            name.includes(text) ||
+
+            country.includes(text) ||
+
+            description.includes(text) ||
+
+            text.includes(name) ||
+
+            text.includes(country)
+
+        );
+
+    });
+
+}
+
+
+/* ================================================= */
+/* LOCAL CITY INFORMATION                           */
+/* ================================================= */
+
+function showLocalCityInformation(results) {
+
+    if (!results.length) {
+
+        return;
+
+    }
+
+    const city =
+        results[0];
+
+    let information =
+        "";
+
+    information +=
+        "📍 " +
+        (city.name || "Unknown city");
+
+    if (city.country) {
+
+        information +=
+            "\n🌍 Country: " +
+            city.country;
+
+    }
+
+    if (city.description) {
+
+        information +=
+            "\n\n" +
+            city.description;
+
+    }
+
+    addAIMessage(
+        information,
+        "bot"
+    );
+
+}
+
+
+/* ================================================= */
+/* WEB SEARCH                                       */
+/* ================================================= */
+
+async function searchInternet(query) {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/search?q=" +
+                encodeURIComponent(query)
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Search failed"
+            );
+
+        }
+
+        const data =
+            await response.json();
+
+        aiSearchResults.innerHTML =
+            "";
+
+        if (
+            !data.results ||
+            data.results.length === 0
+        ) {
+
+            return;
+
+        }
+
+        const title =
+            document.createElement("h3");
+
+        title.textContent =
+            "🔎 Web Search Results";
+
+        aiSearchResults.appendChild(
+            title
+        );
+
+
+        data.results.forEach(
+            result => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "ai-search-card";
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+                link.href =
+                    result.url;
+
+                link.target =
+                    "_blank";
+
+                link.rel =
+                    "noopener noreferrer";
+
+                link.textContent =
+                    result.title ||
+                    "Open result";
+
+
+                const description =
+                    document.createElement(
+                        "p"
+                    );
+
+                description.textContent =
+                    result.snippet ||
+                    "";
+
+
+                card.appendChild(
+                    link
+                );
+
+                card.appendChild(
+                    description
+                );
+
+                aiSearchResults.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Web search error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ================================================= */
+/* REMOTE AI REQUEST                                */
+/* ================================================= */
+
+async function askRemoteAI(question) {
+
+    if (aiStatus) {
+
+        aiStatus.textContent =
+            "● Thinking...";
+
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/ai",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            message:
+                                question
+                        })
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "AI request failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (data.answer) {
+
+            addAIMessage(
+                data.answer,
+                "bot"
+            );
+
+        }
+
+        else {
+
+            addAIMessage(
+                "Sorry, I could not find an answer.",
+                "bot"
+            );
+
+        }
+
+        return true;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "AI Error:",
+            error
+        );
+
+        return false;
+
+    }
+
+    finally {
+
+        if (aiStatus) {
+
+            aiStatus.textContent =
+                "● Ready";
+
+        }
+
+    }
+
+}
+
+
+/* ================================================= */
+/* MAIN AI FUNCTION                                 */
+/* ================================================= */
+
+async function processAIQuestion() {
+
+    if (!aiQuestion) {
+
+        return;
+
+    }
+
+    const question =
+        aiQuestion.value
+            .trim();
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    /* Show user question */
+
+    addAIMessage(
+        question,
+        "user"
+    );
+
+
+    /* Clear input */
+
+    aiQuestion.value =
+        "";
+
+
+    /* Local city database */
+
+    try {
+
+        const localResults =
+            searchLocalCities(
+                question
+            );
+
+        if (
+            localResults.length > 0
+        ) {
+
+            showLocalCityInformation(
+                localResults
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Local city search error:",
+            error
+        );
+
+    }
+
+
+    /* Local AI */
+
+    askLocalAI(
+        question
+    );
+
+
+    /* Remote AI */
+
+    const remoteWorked =
+        await askRemoteAI(
+            question
+        );
+
+
+    /* Web search */
+
+    if (remoteWorked) {
+
+        try {
+
+            await searchInternet(
+                question
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Internet search error:",
+                error
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ================================================= */
+/* SEND BUTTON                                      */
+/* ================================================= */
+
+if (aiSendButton) {
+
+    aiSendButton.addEventListener(
+        "click",
+        processAIQuestion
+    );
+
+}
+
+
+/* ================================================= */
+/* SECOND SEND BUTTON                               */
+/* ================================================= */
+
+const secondSendButton =
+    document.getElementById(
+        "sendBtn"
+    );
+
+if (secondSendButton) {
+
+    secondSendButton.addEventListener(
+        "click",
+        processAIQuestion
+    );
+
+}
+
+
+/* ================================================= */
+/* ENTER KEY                                        */
+/* ================================================= */
+
+if (aiQuestion) {
+
+    aiQuestion.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                processAIQuestion();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ================================================= */
+/* SPEECH                                           */
 /* ================================================= */
 
 function startVoice() {
@@ -2098,6 +2358,7 @@ function startVoice() {
     const SpeechRecognition =
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
+
 
     if (!SpeechRecognition) {
 
@@ -2118,19 +2379,67 @@ function startVoice() {
         "en-US";
 
 
+    recognition.onstart =
+        function() {
+
+            if (aiStatus) {
+
+                aiStatus.textContent =
+                    "🎤 Listening...";
+
+            }
+
+        };
+
+
     recognition.onresult =
-    function(event) {
+        function(event) {
 
-        let text =
-            event.results[0][0].transcript;
+            let text =
+                event.results[0][0]
+                    .transcript;
 
-        document.getElementById(
-            "userInput"
-        ).value = text;
+            if (aiQuestion) {
 
-        askAI();
+                aiQuestion.value =
+                    text;
 
-    };
+                processAIQuestion();
+
+            }
+
+        };
+
+
+    recognition.onerror =
+        function(error) {
+
+            console.log(
+                "Voice error:",
+                error
+            );
+
+            if (aiStatus) {
+
+                aiStatus.textContent =
+                    "● Ready";
+
+            }
+
+        };
+
+
+    recognition.onend =
+        function() {
+
+            if (aiStatus) {
+
+                aiStatus.textContent =
+                    "● Ready";
+
+            }
+
+        };
 
 
     recognition.start();
@@ -2139,7 +2448,7 @@ function startVoice() {
 
 
 /* ================================================= */
-/* ================= SOUND FX ====================== */
+/* SOUND FX                                         */
 /* ================================================= */
 
 function playSound(type) {
@@ -2167,7 +2476,7 @@ function playSound(type) {
 
 
 /* ================================================= */
-/* ================= IMAGE UPLOAD ================== */
+/* IMAGE UPLOAD                                     */
 /* ================================================= */
 
 function uploadImage() {
@@ -2194,111 +2503,151 @@ function uploadImage() {
 
 
     reader.onload =
-    function(e) {
+        function(e) {
 
-        const img =
-            document.createElement("img");
-
-
-        img.src =
-            e.target.result;
+            const img =
+                document.createElement(
+                    "img"
+                );
 
 
-        img.alt =
-            "Uploaded image";
+            img.src =
+                e.target.result;
 
 
-        document
-            .getElementById("userGallery")
-            .appendChild(img);
+            img.alt =
+                "Uploaded image";
 
 
-        saveImage(
-            e.target.result
-        );
+            document
+                .getElementById(
+                    "userGallery"
+                )
+                .appendChild(img);
 
-    };
+
+            saveImage(
+                e.target.result
+            );
+
+        };
 
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(
+        file
+    );
 
 }
 
 
-/* 💾 SAVE */
+/* ================================================= */
+/* SAVE IMAGE                                       */
+/* ================================================= */
 
 function saveImage(src) {
 
     let images =
         JSON.parse(
-            localStorage.getItem("userImages")
+            localStorage.getItem(
+                "userImages"
+            )
         ) || [];
 
 
     images.push(src);
 
 
-    localStorage.setItem(
-        "userImages",
-        JSON.stringify(images)
-    );
+    try {
+
+        localStorage.setItem(
+            "userImages",
+            JSON.stringify(images)
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Image storage error:",
+            error
+        );
+
+        alert(
+            "Image is too large for browser storage."
+        );
+
+    }
 
 }
 
 
-/* 🔄 LOAD SAVED */
+/* ================================================= */
+/* LOAD SAVED IMAGES                                */
+/* ================================================= */
 
 function loadSavedImages() {
 
     let images =
         JSON.parse(
-            localStorage.getItem("userImages")
+            localStorage.getItem(
+                "userImages"
+            )
         ) || [];
 
 
-    images.forEach(src => {
+    images.forEach(
+        src => {
 
-        const img =
-            document.createElement("img");
-
-
-        img.src =
-            src;
-
-
-        img.alt =
-            "Saved image";
+            const img =
+                document.createElement(
+                    "img"
+                );
 
 
-        document
-            .getElementById("userGallery")
-            .appendChild(img);
+            img.src =
+                src;
 
-    });
+
+            img.alt =
+                "Saved image";
+
+
+            document
+                .getElementById(
+                    "userGallery"
+                )
+                .appendChild(img);
+
+        }
+    );
 
 }
 
 
 /* ================================================= */
-/* ================= LIKE SYSTEM =================== */
+/* LIKE SYSTEM                                      */
 /* ================================================= */
 
 function likePost(btn) {
 
     let count =
-        btn.querySelector("span");
+        btn.querySelector(
+            "span"
+        );
 
 
     count.innerText =
         parseInt(
-            count.innerText || "0"
+            count.innerText ||
+            "0"
         ) + 1;
 
 }
 
 
 /* ================================================= */
-/* ================= COMMENTS ====================== */
+/* COMMENTS                                         */
 /* ================================================= */
 
 function addComment(btn) {
@@ -2321,27 +2670,36 @@ function addComment(btn) {
 
     if (
         input.value.trim() === ""
-    ) return;
+    ) {
+
+        return;
+
+    }
 
 
     const p =
-        document.createElement("p");
+        document.createElement(
+            "p"
+        );
 
 
     p.innerText =
         input.value;
 
 
-    list.appendChild(p);
+    list.appendChild(
+        p
+    );
 
 
-    input.value = "";
+    input.value =
+        "";
 
 }
 
 
 /* ================================================= */
-/* ================= LOGIN ========================= */
+/* LOGIN                                            */
 /* ================================================= */
 
 function login() {
@@ -2370,15 +2728,20 @@ function login() {
 
 
     alert(
-        "Welcome " + username
+        "Welcome " +
+        username
     );
 
 }
 
 
 /* ================================================= */
-/* ================= CAMERA ======================== */
+/* CAMERA                                           */
 /* ================================================= */
+
+let cameraStream =
+    null;
+
 
 function startCamera() {
 
@@ -2397,40 +2760,61 @@ function startCamera() {
 
 
     navigator.mediaDevices
-    .getUserMedia({
-        video: true
-    })
+        .getUserMedia({
+            video: true
+        })
 
-    .then(stream => {
+        .then(
+            stream => {
 
-        document
-            .getElementById("camera")
-            .srcObject = stream;
+                cameraStream =
+                    stream;
 
-    })
+                const camera =
+                    document.getElementById(
+                        "camera"
+                    );
 
-    .catch(error => {
+                if (camera) {
 
-        console.log(
-            "Camera permission:",
-            error
+                    camera.srcObject =
+                        stream;
+
+                }
+
+            }
+        )
+
+        .catch(
+            error => {
+
+                console.log(
+                    "Camera permission:",
+                    error
+                );
+
+            }
         );
-
-    });
 
 }
 
 
-/* 📸 TAKE PHOTO */
+/* ================================================= */
+/* TAKE PHOTO                                       */
+/* ================================================= */
 
 function takePhoto() {
 
     const video =
-        document.getElementById("camera");
+        document.getElementById(
+            "camera"
+        );
 
 
     const canvas =
-        document.getElementById("canvas");
+        document.getElementById(
+            "canvas"
+        );
 
 
     if (
@@ -2448,7 +2832,9 @@ function takePhoto() {
 
 
     const ctx =
-        canvas.getContext("2d");
+        canvas.getContext(
+            "2d"
+        );
 
 
     canvas.width =
@@ -2465,6 +2851,46 @@ function takePhoto() {
         0
     );
 
+
+    try {
+
+        const photo =
+            canvas.toDataURL(
+                "image/png"
+            );
+
+        saveImage(
+            photo
+        );
+
+        const img =
+            document.createElement(
+                "img"
+            );
+
+        img.src =
+            photo;
+
+        img.alt =
+            "Captured photo";
+
+        document
+            .getElementById(
+                "userGallery"
+            )
+            .appendChild(img);
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Capture error:",
+            error
+        );
+
+    }
+
 }
 
 
@@ -2474,37 +2900,55 @@ function takePhoto() {
 
 let videos =
     JSON.parse(
-        localStorage.getItem("worldCitiesVideos")
+        localStorage.getItem(
+            "worldCitiesVideos"
+        )
     ) || [];
 
 
 const videoUpload =
-document.getElementById("videoUpload");
+    document.getElementById(
+        "videoUpload"
+    );
 
 const videoUploadBtn =
-document.getElementById("videoUploadBtn");
+    document.getElementById(
+        "videoUploadBtn"
+    );
 
 const videoGallery =
-document.getElementById("videoGallery");
+    document.getElementById(
+        "videoGallery"
+    );
 
 const videoSearch =
-document.getElementById("videoSearch");
+    document.getElementById(
+        "videoSearch"
+    );
 
 const videoPlayerBox =
-document.getElementById("videoPlayerBox");
+    document.getElementById(
+        "videoPlayerBox"
+    );
 
 const mainVideoPlayer =
-document.getElementById("mainVideoPlayer");
+    document.getElementById(
+        "mainVideoPlayer"
+    );
 
 const currentVideoTitle =
-document.getElementById("currentVideoTitle");
+    document.getElementById(
+        "currentVideoTitle"
+    );
 
 const closeVideoBtn =
-document.getElementById("closeVideoBtn");
+    document.getElementById(
+        "closeVideoBtn"
+    );
 
 
 /* ================================================= */
-/* 🎥 SAVE VIDEOS                                   */
+/* SAVE VIDEOS                                      */
 /* ================================================= */
 
 function saveVideos() {
@@ -2535,7 +2979,7 @@ function saveVideos() {
 
 
 /* ================================================= */
-/* 📤 UPLOAD VIDEO                                  */
+/* UPLOAD VIDEO                                     */
 /* ================================================= */
 
 function uploadVideo() {
@@ -2555,7 +2999,11 @@ function uploadVideo() {
     }
 
 
-    if (!file.type.startsWith("video/")) {
+    if (
+        !file.type.startsWith(
+            "video/"
+        )
+    ) {
 
         alert(
             "Please select a valid video file."
@@ -2571,64 +3019,71 @@ function uploadVideo() {
 
 
     reader.onload =
-    function(event) {
+        function(event) {
 
-        const videoData = {
+            const videoData = {
 
-            id:
-                Date.now(),
+                id:
+                    Date.now(),
 
-            name:
-                file.name,
+                name:
+                    file.name,
 
-            type:
-                file.type,
+                type:
+                    file.type,
 
-            size:
-                file.size,
+                size:
+                    file.size,
 
-            data:
-                event.target.result,
+                data:
+                    event.target.result,
 
-            date:
-                new Date().toLocaleString()
+                date:
+                    new Date()
+                        .toLocaleString()
+
+            };
+
+
+            videos.push(
+                videoData
+            );
+
+
+            saveVideos();
+
+
+            displayVideos();
+
+
+            videoUpload.value =
+                "";
+
+
+            alert(
+                "🎥 Video uploaded successfully!"
+            );
 
         };
 
 
-        videos.push(
-            videoData
-        );
-
-
-        saveVideos();
-
-
-        displayVideos();
-
-
-        videoUpload.value = "";
-
-
-        alert(
-            "🎥 Video uploaded successfully!"
-        );
-
-    };
-
-
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(
+        file
+    );
 
 }
 
 
 /* ================================================= */
-/* 🎥 DISPLAY VIDEOS                                */
+/* DISPLAY VIDEOS                                   */
 /* ================================================= */
 
-function displayVideos(list = videos) {
+function displayVideos(
+    list = videos
+) {
 
-    videoGallery.innerHTML = "";
+    videoGallery.innerHTML =
+        "";
 
 
     if (!list.length) {
@@ -2653,118 +3108,123 @@ function displayVideos(list = videos) {
     }
 
 
-    list.forEach(video => {
+    list.forEach(
+        video => {
 
-        const card =
-            document.createElement("div");
-
-
-        card.className =
-            "video-card";
-
-
-        card.innerHTML = `
-
-            <div class="video-thumbnail">
-
-                <video
-                    src="${video.data}"
-                    preload="metadata"
-                    muted
-                >
-                </video>
-
-            </div>
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-            <div class="video-card-content">
-
-                <h3>
-                    🎬 ${escapeAIText(video.name)}
-                </h3>
-
-                <p>
-                    📅 ${escapeAIText(video.date)}
-                </p>
+            card.className =
+                "video-card";
 
 
-                <div class="video-buttons">
+            card.innerHTML = `
 
-                    <button
-                        type="button"
-                        class="watch-video-btn"
+                <div class="video-thumbnail">
+
+                    <video
+                        src="${video.data}"
+                        preload="metadata"
+                        muted
                     >
-                        ▶️ Watch Video
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="delete-video-btn"
-                    >
-                        🗑️ Delete
-                    </button>
+                    </video>
 
                 </div>
 
-            </div>
 
-        `;
+                <div class="video-card-content">
+
+                    <h3>
+                        🎬 ${escapeAIText(video.name)}
+                    </h3>
+
+                    <p>
+                        📅 ${escapeAIText(video.date)}
+                    </p>
 
 
-        const watchButton =
-            card.querySelector(
-                ".watch-video-btn"
+                    <div class="video-buttons">
+
+                        <button
+                            type="button"
+                            class="watch-video-btn"
+                        >
+                            ▶️ Watch Video
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="delete-video-btn"
+                        >
+                            🗑️ Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const watchButton =
+                card.querySelector(
+                    ".watch-video-btn"
+                );
+
+
+            const deleteButton =
+                card.querySelector(
+                    ".delete-video-btn"
+                );
+
+
+            watchButton.addEventListener(
+                "click",
+                () => {
+
+                    playVideo(
+                        video
+                    );
+
+                }
             );
 
 
-        const deleteButton =
-            card.querySelector(
-                ".delete-video-btn"
+            deleteButton.addEventListener(
+                "click",
+                () => {
+
+                    deleteVideo(
+                        video.id
+                    );
+
+                }
             );
 
 
-        watchButton.addEventListener(
-            "click",
-            () => {
+            videoGallery.appendChild(
+                card
+            );
 
-                playVideo(
-                    video
-                );
-
-            }
-        );
-
-
-        deleteButton.addEventListener(
-            "click",
-            () => {
-
-                deleteVideo(
-                    video.id
-                );
-
-            }
-        );
-
-
-        videoGallery.appendChild(
-            card
-        );
-
-    });
+        }
+    );
 
 }
 
 
 /* ================================================= */
-/* ▶️ PLAY VIDEO                                    */
+/* PLAY VIDEO                                       */
 /* ================================================= */
 
 function playVideo(video) {
 
     currentVideoTitle.textContent =
-        "🎬 " + video.name;
+        "🎬 " +
+        video.name;
 
 
     mainVideoPlayer.src =
@@ -2789,7 +3249,7 @@ function playVideo(video) {
 
 
 /* ================================================= */
-/* ❌ CLOSE VIDEO                                    */
+/* CLOSE VIDEO                                      */
 /* ================================================= */
 
 function closeVideoPlayer() {
@@ -2810,7 +3270,7 @@ function closeVideoPlayer() {
 
 
 /* ================================================= */
-/* 🗑️ DELETE VIDEO                                  */
+/* DELETE VIDEO                                     */
 /* ================================================= */
 
 function deleteVideo(id) {
@@ -2847,25 +3307,27 @@ function deleteVideo(id) {
 
 
 /* ================================================= */
-/* 🔍 SEARCH VIDEO                                  */
+/* SEARCH VIDEO                                     */
 /* ================================================= */
 
 function searchVideos(value) {
 
     const query =
         value
-        .toLowerCase()
-        .trim();
+            .toLowerCase()
+            .trim();
 
 
     const filtered =
-        videos.filter(video => {
+        videos.filter(
+            video => {
 
-            return video.name
-                .toLowerCase()
-                .includes(query);
+                return video.name
+                    .toLowerCase()
+                    .includes(query);
 
-        });
+            }
+        );
 
 
     displayVideos(
@@ -2876,35 +3338,7 @@ function searchVideos(value) {
 
 
 /* ================================================= */
-/* 🎥 VIDEO EVENTS                                  */
-/* ================================================= */
-
-videoUploadBtn.addEventListener(
-    "click",
-    uploadVideo
-);
-
-
-closeVideoBtn.addEventListener(
-    "click",
-    closeVideoPlayer
-);
-
-
-videoSearch.addEventListener(
-    "input",
-    function(event) {
-
-        searchVideos(
-            event.target.value
-        );
-
-    }
-);
-
-
-/* ================================================= */
-/* 🎮 QUIZ                                          */
+/* QUIZ                                             */
 /* ================================================= */
 
 function startQuiz() {
@@ -2917,13 +3351,128 @@ function startQuiz() {
 
 
 /* ================================================= */
-/* ================= EVENT LISTENERS =============== */
+/* SAFE TEXT                                        */
+/* ================================================= */
+
+function escapeAIText(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        String(text ?? "");
+
+    return div.innerHTML;
+
+}
+
+
+/* ================================================= */
+/* SEARCH SYSTEM                                    */
+/* ================================================= */
+
+function searchCities() {
+
+    const searchText =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+    if (searchText === "") {
+
+        displayCities(
+            cities
+        );
+
+        return;
+
+    }
+
+
+    const filteredCities =
+        cities.filter(
+            city => {
+
+                const cityName =
+                    (
+                        city.name ||
+                        ""
+                    ).toLowerCase();
+
+                const country =
+                    (
+                        city.country ||
+                        ""
+                    ).toLowerCase();
+
+                const description =
+                    (
+                        city.description ||
+                        ""
+                    ).toLowerCase();
+
+
+                return (
+
+                    cityName.includes(
+                        searchText
+                    )
+
+                    ||
+
+                    country.includes(
+                        searchText
+                    )
+
+                    ||
+
+                    description.includes(
+                        searchText
+                    )
+
+                );
+
+            }
+        );
+
+
+    if (
+        filteredCities.length === 0
+    ) {
+
+        cityContainer.innerHTML = `
+
+            <div class="no-results">
+
+                🔍 No city found for
+                "<strong>${escapeAIText(searchInput.value)}</strong>"
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    displayCities(
+        filteredCities
+    );
+
+}
+
+
+/* ================================================= */
+/* DOM READY                                        */
 /* ================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
-
 
         /* Display cities */
 
@@ -2932,136 +3481,311 @@ document.addEventListener(
         );
 
 
-        /* Load saved images */
+        /* Load images */
 
         loadSavedImages();
 
 
-        /* Display saved videos */
+        /* Display videos */
 
         displayVideos();
 
 
         /* Search */
 
-        searchInput.addEventListener(
-            "input",
-            e => {
+        if (searchInput) {
 
-                searchCity(
-                    e.target.value
-                );
+            searchInput.addEventListener(
+                "input",
+                searchCities
+            );
 
-            }
-        );
+            searchInput.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Escape"
+                    ) {
+
+                        searchInput.value =
+                            "";
+
+                        displayCities(
+                            cities
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* Clear Search */
+
+        if (clearSearch) {
+
+            clearSearch.addEventListener(
+                "click",
+                function() {
+
+                    searchInput.value =
+                        "";
+
+                    displayCities(
+                        cities
+                    );
+
+                    searchInput.focus();
+
+                }
+            );
+
+        }
 
 
         /* Theme */
 
-        document
-            .getElementById("themeBtn")
-            .addEventListener(
+        const themeButton =
+            document.getElementById(
+                "themeBtn"
+            );
+
+        if (themeButton) {
+
+            themeButton.addEventListener(
                 "click",
                 toggleTheme
             );
 
+        }
 
-        /* Close lightbox */
 
-        document
-            .getElementById("closeBtn")
-            .addEventListener(
+        /* Close Lightbox */
+
+        const closeButton =
+            document.getElementById(
+                "closeBtn"
+            );
+
+        if (closeButton) {
+
+            closeButton.addEventListener(
                 "click",
                 closeLightbox
             );
 
+        }
+
 
         /* Favorite */
 
-        document
-            .getElementById("favBtn")
-            .addEventListener(
+        const favoriteButton =
+            document.getElementById(
+                "favBtn"
+            );
+
+        if (favoriteButton) {
+
+            favoriteButton.addEventListener(
                 "click",
                 toggleFavorite
             );
 
-
-        /* AI */
-
-        document
-            .getElementById("sendBtn")
-            .addEventListener(
-                "click",
-                askAI
-            );
+        }
 
 
         /* Voice */
 
-        document
-            .getElementById("voiceBtn")
-            .addEventListener(
+        const voiceButton =
+            document.getElementById(
+                "voiceBtn"
+            );
+
+        if (voiceButton) {
+
+            voiceButton.addEventListener(
                 "click",
                 startVoice
             );
 
+        }
+
 
         /* Upload */
 
-        document
-            .getElementById("uploadBtn")
-            .addEventListener(
+        const uploadButton =
+            document.getElementById(
+                "uploadBtn"
+            );
+
+        if (uploadButton) {
+
+            uploadButton.addEventListener(
                 "click",
                 uploadImage
             );
 
+        }
 
-        /* Like */
 
-        document
-            .getElementById("likeBtn")
-            .addEventListener(
+        /* Download */
+
+        const downloadButton =
+            document.getElementById(
+                "downloadBtn"
+            );
+
+        if (downloadButton) {
+
+            downloadButton.addEventListener(
                 "click",
                 function() {
 
-                    likePost(this);
+                    if (
+                        currentCities.length
+                    ) {
+
+                        downloadImage(
+                            currentCities[
+                                currentIndex
+                            ].image,
+
+                            currentCities[
+                                currentIndex
+                            ].name
+                        );
+
+                    }
 
                 }
             );
+
+        }
+
+
+        /* Like */
+
+        const likeButton =
+            document.getElementById(
+                "likeBtn"
+            );
+
+        if (likeButton) {
+
+            likeButton.addEventListener(
+                "click",
+                function() {
+
+                    likePost(
+                        this
+                    );
+
+                }
+            );
+
+        }
 
 
         /* Comment */
 
-        document
-            .getElementById("commentBtn")
-            .addEventListener(
+        const commentButton =
+            document.getElementById(
+                "commentBtn"
+            );
+
+        if (commentButton) {
+
+            commentButton.addEventListener(
                 "click",
                 function() {
 
-                    addComment(this);
+                    addComment(
+                        this
+                    );
 
                 }
             );
 
+        }
+
 
         /* Login */
 
-        document
-            .getElementById("loginBtn")
-            .addEventListener(
+        const loginButton =
+            document.getElementById(
+                "loginBtn"
+            );
+
+        if (loginButton) {
+
+            loginButton.addEventListener(
                 "click",
                 login
             );
 
+        }
+
 
         /* Camera */
 
-        document
-            .getElementById("captureBtn")
-            .addEventListener(
+        const captureButton =
+            document.getElementById(
+                "captureBtn"
+            );
+
+        if (captureButton) {
+
+            captureButton.addEventListener(
                 "click",
                 takePhoto
             );
+
+        }
+
+
+        /* Video Upload */
+
+        if (videoUploadBtn) {
+
+            videoUploadBtn.addEventListener(
+                "click",
+                uploadVideo
+            );
+
+        }
+
+
+        /* Video Close */
+
+        if (closeVideoBtn) {
+
+            closeVideoBtn.addEventListener(
+                "click",
+                closeVideoPlayer
+            );
+
+        }
+
+
+        /* Video Search */
+
+        if (videoSearch) {
+
+            videoSearch.addEventListener(
+                "input",
+                function(event) {
+
+                    searchVideos(
+                        event.target.value
+                    );
+
+                }
+            );
+
+        }
 
 
         /* Quiz */
@@ -3070,7 +3794,6 @@ document.addEventListener(
             document.getElementById(
                 "quizBtn"
             );
-
 
         if (quizButton) {
 
@@ -3086,199 +3809,232 @@ document.addEventListener(
 
         startCamera();
 
+
+        /* Globe */
+
+        initializeGlobe();
+
     }
 );
 
 
 /* ================================================= */
-/* ================= ENTER KEY ===================== */
+/* 🌎 GLOBE                                        */
 /* ================================================= */
 
-document
-    .getElementById("userInput")
-    .addEventListener(
-        "keydown",
-        function(event) {
+function initializeGlobe() {
 
-            if (event.key === "Enter") {
-
-                askAI();
-
-            }
-
-        }
-    );
-const search  = document.getElementById("searchInput");
-const clearSearch = document.getElementById("clearSearch");
-
-function searchCities() {
-    const searchText = searchInput.value
-        .toLowerCase()
-        .trim();
-
-    if (searchText === "") {
-        displayCities(cities);
-        return;
-    }
-
-    const filteredCities = cities.filter(city => {
-
-        const cityName = (city.name || "").toLowerCase();
-        const country = (city.country || "").toLowerCase();
-        const description = (city.description || "").toLowerCase();
-
-        return (
-            cityName.includes(searchText) ||
-            country.includes(searchText) ||
-            description.includes(searchText)
+    const globeElement =
+        document.getElementById(
+            "globeViz"
         );
-    });
 
-    if (filteredCities.length === 0) {
-        cityContainer.innerHTML = `
-            <div class="no-results">
-                🔍 No city found for 
-                "<strong>${searchInput.value}</strong>"
-            </div>
-        `;
+    if (
+        !globeElement ||
+        typeof Globe === "undefined"
+    ) {
+
         return;
+
     }
 
-    displayCities(filteredCities);
-}
-
-searchInput.addEventListener("input", searchCities);
-
-clearSearch.addEventListener("click", () => {
-    searchInput.value = "";
-    displayCities(cities);
-    searchInput.focus();
-});
-
-searchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        searchInput.value = "";
-        displayCities(cities);
-    }
-});
-// =====================================================
-// SERVER SIDE - server.js
-// Node.js backend
-// =====================================================
-
-const express = require("express");
-const OpenAI = require("openai");
-const path = require("path");
-
-const app = express();
-
-app.use(express.json());
-
-app.use(express.static(
-    path.join(__dirname, "public")
-));
-
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
-
-
-/* =====================================================
-   AI ENDPOINT
-   ===================================================== */
-
-app.post("/api/ai", async (req, res) => {
 
     try {
 
-        const question =
-            String(req.body.question || "").trim();
+        const globe =
+            Globe()(globeElement)
+
+                .globeImageUrl(
+                    "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+                )
+
+                .bumpImageUrl(
+                    "https://unpkg.com/three-globe/example/img/earth-topology.png"
+                )
+
+                .backgroundImageUrl(
+                    "https://unpkg.com/three-globe/example/img/night-sky.png"
+                );
 
 
-        if (!question) {
-
-            return res.status(400).json({
-                error: "Question is required"
-            });
-
-        }
-
-
-        const response =
-            await openai.responses.create({
-
-                model: "gpt-5.6-luna",
-
-                tools: [
-                    {
-                        type: "web_search"
-                    }
-                ],
-
-                input: [
-                    {
-                        role: "system",
-
-                        content:
-                            "You are an AI assistant for a World Cities website. " +
-                            "Answer questions about cities, countries, geography, " +
-                            "locations, landmarks, travel locations and places. " +
-                            "When current information is needed, use web search. " +
-                            "Give clear answers and distinguish current information " +
-                            "from general geographic knowledge."
-                    },
-
-                    {
-                        role: "user",
-
-                        content: question
-                    }
-                ]
-            });
-
-
-        res.json({
-
-            answer:
-                response.output_text || "No answer found."
-
-        });
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        res.status(500).json({
-
-            error:
-                "AI request failed"
-
-        });
+        globe
+            .pointsData(
+                cities.map(
+                    city => ({
+                        lat: 0,
+                        lng: 0,
+                        name:
+                            city.name
+                    })
+                )
+            );
 
     }
 
-});
+    catch (error) {
+
+        console.log(
+            "Globe error:",
+            error
+        );
+
+    }
+
+}
 
 
-/* =====================================================
-   START SERVER
-   ===================================================== */
+/* ================================================= */
+/* 🌍 CESIUM                                        */
+/* ================================================= */
 
-const PORT =
-    process.env.PORT || 3000;
+function initializeCesium() {
+
+    const cesiumElement =
+        document.getElementById(
+            "cesiumContainer"
+        );
+
+    if (
+        !cesiumElement ||
+        typeof Cesium === "undefined"
+    ) {
+
+        return;
+
+    }
 
 
-app.listen(PORT, () => {
+    try {
 
-    console.log(
-        `Server running on http://localhost:${PORT}`
+        const viewer =
+            new Cesium.Viewer(
+                "cesiumContainer",
+                {
+                    animation: false,
+                    timeline: false,
+                    baseLayerPicker: false,
+                    geocoder: false,
+                    homeButton: false,
+                    sceneModePicker: false,
+                    navigationHelpButton: false
+                }
+            );
+
+
+        viewer.scene.globe.enableLighting =
+            true;
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Cesium error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ================================================= */
+/* START CESIUM AFTER PAGE LOAD                     */
+/* ================================================= */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        initializeCesium();
+
+    }
+);
+
+
+/* ================================================= */
+/* INTRO / SPLASH                                   */
+/* ================================================= */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        setTimeout(
+            function() {
+
+                const intro =
+                    document.getElementById(
+                        "intro"
+                    );
+
+                if (intro) {
+
+                    intro.style.display =
+                        "none";
+
+                }
+
+            },
+            1800
+        );
+
+
+        setTimeout(
+            function() {
+
+                const splash =
+                    document.getElementById(
+                        "splash"
+                    );
+
+                if (splash) {
+
+                    splash.style.display =
+                        "none";
+
+                }
+
+            },
+            2500
+        );
+
+    }
+);
+
+
+/* ================================================= */
+/* GOOGLE TRANSLATE                                 */
+/* ================================================= */
+
+function googleTranslateElementInit() {
+
+    if (
+        typeof google === "undefined" ||
+        !google.translate
+    ) {
+
+        return;
+
+    }
+
+
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: "en"
+        },
+        "google_translate_element"
     );
 
-});
+}
+
 </script>
+
+
+<script
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+></script>
+
 
 </body>
 </html>
-```
