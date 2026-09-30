@@ -377,6 +377,271 @@
     }
 
 }
+/* =================================================
+   🎵 YOUTUBE MUSIC & VIDEO CENTER
+================================================== */
+
+.youtube-section {
+    width: 96%;
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.12);
+}
+
+.youtube-search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#youtubeSearchInput {
+    flex: 1;
+    padding: 15px 18px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    outline: none;
+    font-size: 16px;
+}
+
+#youtubeSearchInput:focus {
+    border-color: #ff0000;
+}
+
+#youtubeSearchBtn {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #ff0000;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#youtubeSearchBtn:hover {
+    opacity: .85;
+}
+
+.youtube-search-status {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.youtube-player-box {
+    margin-top: 20px;
+    background: #111;
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.youtube-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+#closeYoutubeBtn {
+    border: none;
+    background: #dc3545;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#youtubePlayer {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.youtube-video-info {
+    padding: 15px 5px;
+}
+
+.youtube-video-info h3 {
+    margin-bottom: 8px;
+}
+
+.youtube-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.youtube-actions button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #f1f1f1;
+}
+
+.youtube-actions button:hover {
+    transform: translateY(-1px);
+}
+
+.youtube-comments {
+    background: #fff;
+    color: #222;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.youtube-comment-input {
+    display: flex;
+    gap: 10px;
+}
+
+#youtubeCommentInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+#youtubeCommentBtn {
+    border: none;
+    background: #0d6efd;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.youtube-comment-list {
+    margin-top: 15px;
+}
+
+.youtube-comment {
+    padding: 10px;
+    margin-top: 8px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.youtube-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.youtube-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,.12);
+}
+
+.youtube-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.youtube-card-content {
+    padding: 15px;
+}
+
+.youtube-card-content h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+.youtube-card-content p {
+    margin: 6px 0;
+    color: #666;
+}
+
+.youtube-card-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.youtube-card-buttons button {
+    border: none;
+    padding: 9px 13px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.youtube-watch-btn {
+    background: #ff0000;
+    color: white;
+}
+
+.youtube-share-card-btn {
+    background: #eee;
+}
+
+.youtube-related-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+}
+
+.youtube-upload-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f5f7fb;
+    border-radius: 15px;
+}
+
+#youtubeUploadBtn {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #198754;
+    color: white;
+    cursor: pointer;
+}
+
+.youtube-uploaded-video {
+    margin-top: 15px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+
+    .youtube-section {
+        width: 94%;
+        padding: 15px;
+    }
+
+    .youtube-search-box {
+        flex-direction: column;
+    }
+
+    #youtubeSearchBtn {
+        width: 100%;
+    }
+
+    #youtubePlayer {
+        height: 250px;
+    }
+
+    .youtube-comment-input {
+        flex-direction: column;
+    }
+
+    .youtube-results {
+        grid-template-columns: 1fr;
+    }
+
+}
 
 </style>
 
@@ -628,6 +893,239 @@
         id="videoGallery"
         class="video-gallery"
     >
+    </div>
+
+</section>
+<!-- =================================================
+     🎵 YOUTUBE MUSIC & VIDEO CENTER
+================================================== -->
+
+<section class="youtube-section">
+
+    <h2 class="section-title">
+        🎵 YouTube Music & Video Center
+    </h2>
+
+    <!-- 🔍 YOUTUBE SEARCH -->
+
+    <div class="youtube-search-box">
+
+        <input
+            type="text"
+            id="youtubeSearchInput"
+            placeholder="🔍 Search song, artist, video or channel..."
+            autocomplete="off"
+        >
+
+        <button
+            id="youtubeSearchBtn"
+            type="button"
+        >
+            🔍 Search
+        </button>
+
+    </div>
+
+
+    <!-- 🔄 SEARCH STATUS -->
+
+    <div
+        id="youtubeSearchStatus"
+        class="youtube-search-status"
+    >
+    </div>
+
+
+    <!-- ▶️ PLAYER -->
+
+    <div
+        id="youtubePlayerBox"
+        class="youtube-player-box"
+        style="display:none;"
+    >
+
+        <div class="youtube-player-header">
+
+            <h3 id="youtubeCurrentTitle">
+                🎵 YouTube Video
+            </h3>
+
+            <button
+                id="closeYoutubeBtn"
+                type="button"
+            >
+                ❌ Close
+            </button>
+
+        </div>
+
+
+        <iframe
+            id="youtubePlayer"
+            width="100%"
+            height="450"
+            src=""
+            title="YouTube Player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+        >
+        </iframe>
+
+
+        <!-- 🎵 VIDEO INFORMATION -->
+
+        <div
+            id="youtubeVideoInfo"
+            class="youtube-video-info"
+        >
+
+            <h3 id="youtubeSongTitle">
+                Song Title
+            </h3>
+
+            <p id="youtubeChannel">
+                👤 Channel
+            </p>
+
+            <p id="youtubeViews">
+                👁️ Views: --
+            </p>
+
+
+            <div class="youtube-actions">
+
+                <button
+                    id="youtubeLikeBtn"
+                    type="button"
+                >
+                    ❤️ <span id="youtubeLikeCount">0</span>
+                </button>
+
+
+                <button
+                    id="youtubeShareBtn"
+                    type="button"
+                >
+                    🔗 Share
+                </button>
+
+
+                <button
+                    id="youtubePromoteBtn"
+                    type="button"
+                >
+                    📢 Promote
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 💬 COMMENTS -->
+
+        <div class="youtube-comments">
+
+            <h3>
+                💬 Comments
+            </h3>
+
+            <div class="youtube-comment-input">
+
+                <input
+                    type="text"
+                    id="youtubeCommentInput"
+                    placeholder="Write a comment..."
+                >
+
+                <button
+                    id="youtubeCommentBtn"
+                    type="button"
+                >
+                    💬 Comment
+                </button>
+
+            </div>
+
+
+            <div
+                id="youtubeCommentList"
+                class="youtube-comment-list"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 🔄 SEARCH RESULTS -->
+
+    <div class="youtube-results-header">
+
+        <h3>
+            🔄 Search Results
+        </h3>
+
+    </div>
+
+
+    <div
+        id="youtubeResults"
+        class="youtube-results"
+    >
+    </div>
+
+
+    <!-- ⏭️ RELATED VIDEOS -->
+
+    <div
+        id="youtubeRelatedBox"
+        class="youtube-related-box"
+        style="display:none;"
+    >
+
+        <h3>
+            ⏭️ Related Videos
+        </h3>
+
+        <div
+            id="youtubeRelatedResults"
+            class="youtube-related-results"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- 📤 UPLOAD -->
+
+    <div class="youtube-upload-box">
+
+        <h3>
+            📤 Upload Your Video
+        </h3>
+
+        <input
+            type="file"
+            id="youtubeUploadInput"
+            accept="video/*"
+        >
+
+        <button
+            id="youtubeUploadBtn"
+            type="button"
+        >
+            📤 Upload Video
+        </button>
+
+        <div
+            id="youtubeUploadedVideos"
+            class="youtube-uploaded-videos"
+        >
+        </div>
+
     </div>
 
 </section>
@@ -3464,7 +3962,949 @@ function searchCities() {
     );
 
 }
+/* =================================================
+   🎵 YOUTUBE SEARCH + PLAYER SYSTEM
+================================================== */
 
+const youtubeSearchInput =
+    document.getElementById("youtubeSearchInput");
+
+const youtubeSearchBtn =
+    document.getElementById("youtubeSearchBtn");
+
+const youtubeSearchStatus =
+    document.getElementById("youtubeSearchStatus");
+
+const youtubeResults =
+    document.getElementById("youtubeResults");
+
+const youtubePlayerBox =
+    document.getElementById("youtubePlayerBox");
+
+const youtubePlayer =
+    document.getElementById("youtubePlayer");
+
+const youtubeCurrentTitle =
+    document.getElementById("youtubeCurrentTitle");
+
+const youtubeSongTitle =
+    document.getElementById("youtubeSongTitle");
+
+const youtubeChannel =
+    document.getElementById("youtubeChannel");
+
+const youtubeViews =
+    document.getElementById("youtubeViews");
+
+const closeYoutubeBtn =
+    document.getElementById("closeYoutubeBtn");
+
+const youtubeLikeBtn =
+    document.getElementById("youtubeLikeBtn");
+
+const youtubeLikeCount =
+    document.getElementById("youtubeLikeCount");
+
+const youtubeShareBtn =
+    document.getElementById("youtubeShareBtn");
+
+const youtubePromoteBtn =
+    document.getElementById("youtubePromoteBtn");
+
+const youtubeCommentInput =
+    document.getElementById("youtubeCommentInput");
+
+const youtubeCommentBtn =
+    document.getElementById("youtubeCommentBtn");
+
+const youtubeCommentList =
+    document.getElementById("youtubeCommentList");
+
+const youtubeRelatedBox =
+    document.getElementById("youtubeRelatedBox");
+
+const youtubeRelatedResults =
+    document.getElementById("youtubeRelatedResults");
+
+const youtubeUploadInput =
+    document.getElementById("youtubeUploadInput");
+
+const youtubeUploadBtn =
+    document.getElementById("youtubeUploadBtn");
+
+const youtubeUploadedVideos =
+    document.getElementById("youtubeUploadedVideos");
+
+
+let currentYouTubeVideo = null;
+
+
+/* =================================================
+   🔍 SEARCH YOUTUBE
+================================================== */
+
+async function searchYouTubeVideos(query) {
+
+    query = String(query || "").trim();
+
+    if (!query) {
+
+        youtubeSearchStatus.textContent =
+            "Please enter a song, artist, video or channel.";
+
+        return;
+
+    }
+
+
+    youtubeSearchStatus.textContent =
+        "🔄 Searching YouTube...";
+
+    youtubeResults.innerHTML = "";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/youtube/search?q=" +
+                encodeURIComponent(query)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "YouTube search failed."
+            );
+
+        }
+
+
+        if (
+            !data.items ||
+            data.items.length === 0
+        ) {
+
+            youtubeSearchStatus.textContent =
+                "🔍 No YouTube videos found.";
+
+            return;
+
+        }
+
+
+        youtubeSearchStatus.textContent =
+            `🎵 ${data.items.length} results found`;
+
+
+        displayYouTubeResults(
+            data.items
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "YouTube Search Error:",
+            error
+        );
+
+        youtubeSearchStatus.textContent =
+            "❌ YouTube search failed. Check your server/API key.";
+
+    }
+
+}
+
+
+/* =================================================
+   🎬 DISPLAY SEARCH RESULTS
+================================================== */
+
+function displayYouTubeResults(items) {
+
+    youtubeResults.innerHTML = "";
+
+
+    items.forEach(video => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "youtube-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${escapeAIText(video.thumbnail || "")}"
+                alt="${escapeAIText(video.title || "YouTube video")}"
+                loading="lazy"
+            >
+
+            <div class="youtube-card-content">
+
+                <h3>
+                    ${escapeAIText(video.title || "Untitled")}
+                </h3>
+
+                <p>
+                    👤 ${escapeAIText(video.channel || "Unknown channel")}
+                </p>
+
+                <p>
+                    👁️ ${escapeAIText(
+                        video.views
+                        ? Number(video.views).toLocaleString()
+                        : "--"
+                    )}
+                </p>
+
+                <div class="youtube-card-buttons">
+
+                    <button
+                        type="button"
+                        class="youtube-watch-btn"
+                    >
+                        ▶️ Watch
+                    </button>
+
+                    <button
+                        type="button"
+                        class="youtube-share-card-btn"
+                    >
+                        🔗 Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        const watchButton =
+            card.querySelector(
+                ".youtube-watch-btn"
+            );
+
+
+        const shareButton =
+            card.querySelector(
+                ".youtube-share-card-btn"
+            );
+
+
+        watchButton.addEventListener(
+            "click",
+            () => {
+
+                playYouTubeVideo(
+                    video
+                );
+
+            }
+        );
+
+
+        shareButton.addEventListener(
+            "click",
+            () => {
+
+                shareYouTubeVideo(
+                    video
+                );
+
+            }
+        );
+
+
+        youtubeResults.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+/* =================================================
+   ▶️ PLAY YOUTUBE VIDEO
+================================================== */
+
+function playYouTubeVideo(video) {
+
+    if (!video || !video.videoId) {
+
+        return;
+
+    }
+
+
+    currentYouTubeVideo =
+        video;
+
+
+    youtubePlayer.src =
+        "https://www.youtube.com/embed/" +
+        encodeURIComponent(video.videoId) +
+        "?autoplay=1&rel=0";
+
+
+    youtubeCurrentTitle.textContent =
+        "🎵 " +
+        (video.title || "YouTube Video");
+
+
+    youtubeSongTitle.textContent =
+        video.title || "Song Title";
+
+
+    youtubeChannel.textContent =
+        "👤 " +
+        (video.channel || "Unknown Channel");
+
+
+    youtubeViews.textContent =
+        "👁️ Views: " +
+        (
+            video.views
+            ? Number(video.views).toLocaleString()
+            : "--"
+        );
+
+
+    youtubePlayerBox.style.display =
+        "block";
+
+
+    loadYouTubeLikes(
+        video.videoId
+    );
+
+
+    loadYouTubeComments(
+        video.videoId
+    );
+
+
+    youtubePlayerBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    loadRelatedYouTubeVideos(
+        video
+    );
+
+}
+
+
+/* =================================================
+   ❌ CLOSE YOUTUBE
+================================================== */
+
+function closeYouTubePlayer() {
+
+    youtubePlayer.src = "";
+
+    youtubePlayerBox.style.display =
+        "none";
+
+    currentYouTubeVideo =
+        null;
+
+}
+
+
+/* =================================================
+   ❤️ LIKE
+================================================== */
+
+function getYouTubeLikes() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "youtubeLikes"
+        )
+    ) || {};
+
+}
+
+
+function loadYouTubeLikes(videoId) {
+
+    const likes =
+        getYouTubeLikes();
+
+    youtubeLikeCount.textContent =
+        likes[videoId] || 0;
+
+}
+
+
+function likeYouTubeVideo() {
+
+    if (
+        !currentYouTubeVideo
+    ) {
+
+        return;
+
+    }
+
+
+    const videoId =
+        currentYouTubeVideo.videoId;
+
+
+    const likes =
+        getYouTubeLikes();
+
+
+    if (!likes[videoId]) {
+
+        likes[videoId] = 0;
+
+    }
+
+
+    likes[videoId]++;
+
+
+    localStorage.setItem(
+        "youtubeLikes",
+        JSON.stringify(likes)
+    );
+
+
+    youtubeLikeCount.textContent =
+        likes[videoId];
+
+}
+
+
+/* =================================================
+   💬 COMMENTS
+================================================== */
+
+function getYouTubeComments() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "youtubeComments"
+        )
+    ) || {};
+
+}
+
+
+function loadYouTubeComments(videoId) {
+
+    const allComments =
+        getYouTubeComments();
+
+
+    const comments =
+        allComments[videoId] || [];
+
+
+    youtubeCommentList.innerHTML =
+        "";
+
+
+    comments.forEach(comment => {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "youtube-comment";
+
+
+        div.textContent =
+            "👤 " +
+            comment;
+
+
+        youtubeCommentList.appendChild(
+            div
+        );
+
+    });
+
+}
+
+
+function addYouTubeComment() {
+
+    if (
+        !currentYouTubeVideo
+    ) {
+
+        return;
+
+    }
+
+
+    const text =
+        youtubeCommentInput.value.trim();
+
+
+    if (!text) {
+
+        return;
+
+    }
+
+
+    const videoId =
+        currentYouTubeVideo.videoId;
+
+
+    const allComments =
+        getYouTubeComments();
+
+
+    if (!allComments[videoId]) {
+
+        allComments[videoId] = [];
+
+    }
+
+
+    allComments[videoId].push(
+        text
+    );
+
+
+    localStorage.setItem(
+        "youtubeComments",
+        JSON.stringify(allComments)
+    );
+
+
+    youtubeCommentInput.value =
+        "";
+
+
+    loadYouTubeComments(
+        videoId
+    );
+
+}
+
+
+/* =================================================
+   🔗 SHARE
+================================================== */
+
+async function shareYouTubeVideo(video) {
+
+    if (!video || !video.videoId) {
+
+        return;
+
+    }
+
+
+    const url =
+        "https://www.youtube.com/watch?v=" +
+        video.videoId;
+
+
+    try {
+
+        if (
+            navigator.share
+        ) {
+
+            await navigator.share({
+
+                title:
+                    video.title || "YouTube Video",
+
+                text:
+                    "Watch this video 🎵",
+
+                url:
+                    url
+
+            });
+
+        }
+
+        else {
+
+            await navigator.clipboard.writeText(
+                url
+            );
+
+            alert(
+                "🔗 YouTube link copied!"
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Share cancelled:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =================================================
+   📢 PROMOTE
+================================================== */
+
+function promoteYouTubeVideo() {
+
+    if (
+        !currentYouTubeVideo ||
+        !currentYouTubeVideo.videoId
+    ) {
+
+        return;
+
+    }
+
+
+    const url =
+        "https://www.youtube.com/watch?v=" +
+        currentYouTubeVideo.videoId;
+
+
+    window.open(
+        "https://www.youtube.com/ads/",
+        "_blank"
+    );
+
+
+    alert(
+        "📢 Use YouTube/Google Ads to promote this video. The promotion uses legitimate advertising, not artificial views or subscribers."
+    );
+
+}
+
+
+/* =================================================
+   ⏭️ RELATED VIDEOS
+================================================== */
+
+async function loadRelatedYouTubeVideos(video) {
+
+    if (
+        !video ||
+        !video.title
+    ) {
+
+        return;
+
+    }
+
+
+    const query =
+        video.channel
+        ? video.channel + " " + video.title
+        : video.title;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/youtube/search?q=" +
+                encodeURIComponent(query)
+            );
+
+
+        if (!response.ok) {
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const related =
+            (data.items || [])
+                .filter(
+                    item =>
+                        item.videoId !==
+                        video.videoId
+                )
+                .slice(0, 6);
+
+
+        if (!related.length) {
+
+            youtubeRelatedBox.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        youtubeRelatedBox.style.display =
+            "block";
+
+
+        youtubeRelatedResults.innerHTML =
+            "";
+
+
+        related.forEach(item => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "youtube-card";
+
+
+            card.innerHTML = `
+
+                <img
+                    src="${escapeAIText(item.thumbnail || "")}"
+                    alt="${escapeAIText(item.title || "")}"
+                >
+
+                <div class="youtube-card-content">
+
+                    <h3>
+                        ${escapeAIText(item.title || "")}
+                    </h3>
+
+                    <p>
+                        👤 ${escapeAIText(item.channel || "")}
+                    </p>
+
+                    <button
+                        type="button"
+                        class="youtube-watch-btn"
+                    >
+                        ▶️ Watch
+                    </button>
+
+                </div>
+
+            `;
+
+
+            card
+                .querySelector(
+                    ".youtube-watch-btn"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        playYouTubeVideo(
+                            item
+                        );
+
+                    }
+                );
+
+
+            youtubeRelatedResults.appendChild(
+                card
+            );
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Related videos error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =================================================
+   📤 UPLOAD YOUR VIDEO
+================================================== */
+
+function uploadYouTubeVideo() {
+
+    const file =
+        youtubeUploadInput.files[0];
+
+
+    if (!file) {
+
+        alert(
+            "Please select a video first."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !file.type.startsWith("video/")
+    ) {
+
+        alert(
+            "Please select a valid video."
+        );
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(event) {
+
+            const videos =
+                JSON.parse(
+                    localStorage.getItem(
+                        "youtubeUserVideos"
+                    )
+                ) || [];
+
+
+            videos.push({
+
+                id:
+                    Date.now(),
+
+                name:
+                    file.name,
+
+                data:
+                    event.target.result,
+
+                date:
+                    new Date()
+                        .toLocaleString()
+
+            });
+
+
+            try {
+
+                localStorage.setItem(
+                    "youtubeUserVideos",
+                    JSON.stringify(videos)
+                );
+
+                displayUploadedYouTubeVideos();
+
+                youtubeUploadInput.value =
+                    "";
+
+            }
+
+            catch (error) {
+
+                alert(
+                    "The video is too large for browser storage. Use a smaller video."
+                );
+
+            }
+
+        };
+
+
+    reader.readAsDataURL(
+        file
+    );
+
+}
+
+
+function displayUploadedYouTubeVideos() {
+
+    const videos =
+        JSON.parse(
+            localStorage.getItem(
+                "youtubeUserVideos"
+            )
+        ) || [];
+
+
+    youtubeUploadedVideos.innerHTML =
+        "";
+
+
+    videos.forEach(video => {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "youtube-uploaded-video";
+
+
+        div.innerHTML = `
+
+            <strong>
+                🎬 ${escapeAIText(video.name)}
+            </strong>
+
+            <p>
+                📅 ${escapeAIText(video.date)}
+            </p>
+
+            <video
+                controls
+                width="100%"
+                src="${video.data}"
+            >
+            </video>
+
+        `;
+
+
+        youtubeUploadedVideos.appendChild(
+            div
+        );
+
+    });
+
+}
 
 /* ================================================= */
 /* DOM READY                                        */
@@ -3786,7 +5226,139 @@ document.addEventListener(
             );
 
         }
+/* =================================================
+   🎵 YOUTUBE EVENTS
+================================================== */
 
+if (youtubeSearchBtn) {
+
+    youtubeSearchBtn.addEventListener(
+        "click",
+        function() {
+
+            searchYouTubeVideos(
+                youtubeSearchInput.value
+            );
+
+        }
+    );
+
+}
+
+
+if (youtubeSearchInput) {
+
+    youtubeSearchInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                searchYouTubeVideos(
+                    youtubeSearchInput.value
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+if (closeYoutubeBtn) {
+
+    closeYoutubeBtn.addEventListener(
+        "click",
+        closeYouTubePlayer
+    );
+
+}
+
+
+if (youtubeLikeBtn) {
+
+    youtubeLikeBtn.addEventListener(
+        "click",
+        likeYouTubeVideo
+    );
+
+}
+
+
+if (youtubeShareBtn) {
+
+    youtubeShareBtn.addEventListener(
+        "click",
+        function() {
+
+            shareYouTubeVideo(
+                currentYouTubeVideo
+            );
+
+        }
+    );
+
+}
+
+
+if (youtubePromoteBtn) {
+
+    youtubePromoteBtn.addEventListener(
+        "click",
+        promoteYouTubeVideo
+    );
+
+}
+
+
+if (youtubeCommentBtn) {
+
+    youtubeCommentBtn.addEventListener(
+        "click",
+        addYouTubeComment
+    );
+
+}
+
+
+if (youtubeCommentInput) {
+
+    youtubeCommentInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                addYouTubeComment();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (youtubeUploadBtn) {
+
+    youtubeUploadBtn.addEventListener(
+        "click",
+        uploadYouTubeVideo
+    );
+
+}
+
+
+displayUploadedYouTubeVideos();
 
         /* Quiz */
 
