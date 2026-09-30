@@ -72,12 +72,15 @@
 
     <div class="search-box">
 
-        <input
-            class="search"
-            type="text"
-            placeholder="🔍 Search city..."
-            id="searchInput"
-        >
+        <div class="search-box">
+    <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="🔍 Search city or country..."
+        autocomplete="off"
+    >
+    <button id="clearSearch" type="button">✕</button>
+</div>
 
         <button
             class="theme-btn"
@@ -131,11 +134,497 @@
 
     <div id="messages"></div>
 
-    <input
-        type="text"
-        id="userInput"
-        placeholder="Ask AI about cities..."
-    >
+    <!-- =========================
+     AI LOCATION ASSISTANT
+     Put this HTML where you want the AI chat to appear
+========================= -->
+
+<section id="aiLocationAssistant" class="ai-location-assistant">
+
+    <div class="ai-header">
+        <div>
+            <h2>🤖 AI Location Assistant</h2>
+            <p>Ask about cities, countries, locations and places.</p>
+        </div>
+        <span id="aiStatus">● Ready</span>
+    </div>
+
+    <div id="aiMessages" class="ai-messages">
+        <div class="ai-message ai-bot">
+            👋 Hello! Ask me about a city, country, location, landmarks,
+            population, geography or other location information.
+        </div>
+    </div>
+
+    <div class="ai-search-results" id="aiSearchResults"></div>
+
+    <div class="ai-input-area">
+        <input
+            type="text"
+            id="aiQuestion"
+            placeholder="Ask about Kigali, Paris, Tokyo..."
+            autocomplete="off"
+        >
+
+      
+        </button>
+    </div>
+
+</section>
+ 
+
+});
+<style>
+.ai-location-assistant {
+    width: 100%;
+    max-width: 900px;
+    margin: 25px auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.15);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.ai-header {
+    padding: 18px;
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.ai-header h2 {
+    margin: 0;
+}
+
+.ai-header p {
+    margin: 5px 0 0;
+    opacity: .9;
+}
+
+#aiStatus {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.ai-messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f5f7fb;
+}
+
+.ai-message {
+    max-width: 85%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border-radius: 15px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.ai-bot {
+    background: white;
+    margin-right: auto;
+}
+
+.ai-user {
+    background: #0d6efd;
+    color: white;
+    margin-left: auto;
+}
+
+.ai-input-area {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+#aiQuestion {
+    flex: 1;
+    padding: 13px 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    font-size: 15px;
+}
+
+#aiQuestion:focus {
+    border-color: #0d6efd;
+}
+
+#aiSendButton {
+    border: none;
+    background: #0d6efd;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+#aiSendButton:hover {
+    background: #084298;
+}
+
+.ai-search-results {
+    padding: 10px 20px;
+}
+
+.ai-search-card {
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.ai-search-card a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+
+    .ai-location-assistant {
+        width: 96%;
+        margin: 15px auto;
+    }
+
+    .ai-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ai-messages {
+        height: 350px;
+    }
+
+    .ai-input-area {
+        flex-direction: column;
+    }
+
+    #aiSendButton {
+        width: 100%;
+    }
+}
+</style>
+
+
+<script>
+/* =====================================================
+   AI LOCATION ASSISTANT
+   ===================================================== */
+
+const aiQuestion = document.getElementById("aiQuestion");
+const aiSendButton = document.getElementById("aiSendButton");
+const aiMessages = document.getElementById("aiMessages");
+const aiStatus = document.getElementById("aiStatus");
+const aiSearchResults = document.getElementById("aiSearchResults");
+
+
+/* Add message to chat */
+function addAIMessage(message, type = "bot") {
+
+    const div = document.createElement("div");
+
+    div.className =
+        type === "user"
+            ? "ai-message ai-user"
+            : "ai-message ai-bot";
+
+    div.textContent = message;
+
+    aiMessages.appendChild(div);
+
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+
+/* Search your existing cities array */
+function searchLocalCities(question) {
+
+    if (typeof cities === "undefined") {
+        return [];
+    }
+
+    const text = question.toLowerCase().trim();
+
+    return cities.filter(city => {
+
+        const name =
+            String(city.name || "").toLowerCase();
+
+        const country =
+            String(city.country || "").toLowerCase();
+
+        const description =
+            String(city.description || "").toLowerCase();
+
+        return (
+            name.includes(text) ||
+            country.includes(text) ||
+            description.includes(text) ||
+            text.includes(name) ||
+            text.includes(country)
+        );
+    });
+}
+
+
+/* Show local city information */
+function showLocalCityInformation(results) {
+
+    if (!results.length) {
+        return;
+    }
+
+    const city = results[0];
+
+    let information = "";
+
+    information += "📍 " + (city.name || "Unknown city");
+
+    if (city.country) {
+        information += "\n🌍 Country: " + city.country;
+    }
+
+    if (city.description) {
+        information += "\n\n" + city.description;
+    }
+
+    addAIMessage(information, "bot");
+}
+
+
+/* =====================================================
+   WEB SEARCH
+   ===================================================== */
+
+async function searchInternet(query) {
+
+    try {
+
+        const response = await fetch(
+            "/api/search?q=" +
+            encodeURIComponent(query)
+        );
+
+        if (!response.ok) {
+            throw new Error("Search failed");
+        }
+
+        const data = await response.json();
+
+        aiSearchResults.innerHTML = "";
+
+        if (!data.results || data.results.length === 0) {
+            return;
+        }
+
+        const title = document.createElement("h3");
+
+        title.textContent = "🔎 Web Search Results";
+
+        aiSearchResults.appendChild(title);
+
+
+        data.results.forEach(result => {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "ai-search-card";
+
+
+            const link =
+                document.createElement("a");
+
+            link.href = result.url;
+
+            link.target = "_blank";
+
+            link.rel = "noopener noreferrer";
+
+            link.textContent =
+                result.title || "Open result";
+
+
+            const description =
+                document.createElement("p");
+
+            description.textContent =
+                result.snippet || "";
+
+
+            card.appendChild(link);
+
+            card.appendChild(description);
+
+            aiSearchResults.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error("Web search error:", error);
+
+    }
+}
+
+
+/* =====================================================
+   AI REQUEST
+   ===================================================== */
+
+async function askAI(question) {
+
+    aiStatus.textContent = "● Thinking...";
+
+    try {
+
+        const response = await fetch(
+            "/api/ai",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    question: question
+                })
+            }
+        );
+
+
+        if (!response.ok) {
+            throw new Error("AI request failed");
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (data.answer) {
+
+            addAIMessage(
+                data.answer,
+                "bot"
+            );
+
+        } else {
+
+            addAIMessage(
+                "Sorry, I could not find an answer.",
+                "bot"
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        addAIMessage(
+            "AI server is not connected yet. Check your backend.",
+            "bot"
+        );
+
+    } finally {
+
+        aiStatus.textContent =
+            "● Ready";
+    }
+}
+
+
+/* =====================================================
+   MAIN AI FUNCTION
+   ===================================================== */
+
+async function processAIQuestion() {
+
+    const question =
+        aiQuestion.value.trim();
+
+
+    if (!question) {
+        return;
+    }
+
+
+    addAIMessage(
+        question,
+        "user"
+    );
+
+
+    aiQuestion.value = "";
+
+
+    /*
+       First search your own cities database.
+    */
+
+    const localResults =
+        searchLocalCities(question);
+
+
+    if (localResults.length > 0) {
+
+        showLocalCityInformation(
+            localResults
+        );
+
+    }
+
+
+    /*
+       Then ask the AI.
+    */
+
+    await askAI(question);
+
+
+    /*
+       Search the Internet through backend.
+    */
+
+    await searchInternet(question);
+}
+
+
+/* Send button */
+
+aiSendButton.addEventListener(
+    "click",
+    processAIQuestion
+);
+
+
+/* Enter key */
+
+aiQuestion.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            processAIQuestion();
+
+        }
+
+    }
+);
+</script>
 
     <button
         id="sendBtn"
@@ -148,7 +637,6 @@
         id="voiceBtn"
         type="button"
     >
-        🎤
     </button>
 
 </div>
@@ -259,7 +747,6 @@
         id="commentBtn"
         type="button"
     >
-        Send
     </button>
 
     <div class="commentList"></div>
@@ -2621,8 +3108,175 @@ document
 
         }
     );
+const search  = document.getElementById("searchInput");
+const clearSearch = document.getElementById("clearSearch");
+
+function searchCities() {
+    const searchText = searchInput.value
+        .toLowerCase()
+        .trim();
+
+    if (searchText === "") {
+        displayCities(cities);
+        return;
+    }
+
+    const filteredCities = cities.filter(city => {
+
+        const cityName = (city.name || "").toLowerCase();
+        const country = (city.country || "").toLowerCase();
+        const description = (city.description || "").toLowerCase();
+
+        return (
+            cityName.includes(searchText) ||
+            country.includes(searchText) ||
+            description.includes(searchText)
+        );
+    });
+
+    if (filteredCities.length === 0) {
+        cityContainer.innerHTML = `
+            <div class="no-results">
+                🔍 No city found for 
+                "<strong>${searchInput.value}</strong>"
+            </div>
+        `;
+        return;
+    }
+
+    displayCities(filteredCities);
+}
+
+searchInput.addEventListener("input", searchCities);
+
+clearSearch.addEventListener("click", () => {
+    searchInput.value = "";
+    displayCities(cities);
+    searchInput.focus();
+});
+
+searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        searchInput.value = "";
+        displayCities(cities);
+    }
+});
+// =====================================================
+// SERVER SIDE - server.js
+// Node.js backend
+// =====================================================
+
+const express = require("express");
+const OpenAI = require("openai");
+const path = require("path");
+
+const app = express();
+
+app.use(express.json());
+
+app.use(express.static(
+    path.join(__dirname, "public")
+));
 
 
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
+
+
+/* =====================================================
+   AI ENDPOINT
+   ===================================================== */
+
+app.post("/api/ai", async (req, res) => {
+
+    try {
+
+        const question =
+            String(req.body.question || "").trim();
+
+
+        if (!question) {
+
+            return res.status(400).json({
+                error: "Question is required"
+            });
+
+        }
+
+
+        const response =
+            await openai.responses.create({
+
+                model: "gpt-5.6-luna",
+
+                tools: [
+                    {
+                        type: "web_search"
+                    }
+                ],
+
+                input: [
+                    {
+                        role: "system",
+
+                        content:
+                            "You are an AI assistant for a World Cities website. " +
+                            "Answer questions about cities, countries, geography, " +
+                            "locations, landmarks, travel locations and places. " +
+                            "When current information is needed, use web search. " +
+                            "Give clear answers and distinguish current information " +
+                            "from general geographic knowledge."
+                    },
+
+                    {
+                        role: "user",
+
+                        content: question
+                    }
+                ]
+            });
+
+
+        res.json({
+
+            answer:
+                response.output_text || "No answer found."
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            error:
+                "AI request failed"
+
+        });
+
+    }
+
+});
+
+
+/* =====================================================
+   START SERVER
+   ===================================================== */
+
+const PORT =
+    process.env.PORT || 3000;
+
+
+app.listen(PORT, () => {
+
+    console.log(
+        `Server running on http://localhost:${PORT}`
+    );
+
+});
 </script>
 
 </body>
